@@ -1,0 +1,19 @@
+---
+title: "First Blog Post"
+description: |
+  A short description of the post.
+author:
+  - name: Stephanie Gluck
+    url: https://github.com/s-gluck
+date: 02-24-2020
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Here is an example page for my first new post 
+
