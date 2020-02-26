@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
+  <url>
+    <loc>https://s-gluck.github.io/blog/about.html</loc>
+    <lastmod>2020-02-24T10:21:08-08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://s-gluck.github.io/blog/</loc>
+    <lastmod>2020-02-24T10:21:08-08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://s-gluck.github.io/blog/LICENSE.html</loc>
+    <lastmod>2020-02-24T10:34:54-08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://s-gluck.github.io/blog/README.html</loc>
+    <lastmod>2020-02-24T10:34:54-08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://s-gluck.github.io/blog/posts/2020-02-24-first-blog-post/</loc>
+    <lastmod>2020-02-26T10:32:25-08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://s-gluck.github.io/blog/posts/welcome/</loc>
+    <lastmod>2020-02-24T10:31:59-08:00</lastmod>
+  </url>
+</urlset>

@@ -10,9 +10,14 @@
       }
     ],
     "date": "2020-02-24",
-    "categories": [],
-    "preview": {},
-    "last_modified": "2020-02-24T11:00:19-08:00"
+    "categories": [
+      "dataviz",
+      "class"
+    ],
+    "preview": "posts/2020-02-24-first-blog-post/first-blog-post_files/figure-html5/plot-ex-1.png",
+    "last_modified": "2020-02-26T10:32:25-08:00",
+    "preview_width": 1248,
+    "preview_height": 768
   },
   {
     "path": "posts/welcome/",
