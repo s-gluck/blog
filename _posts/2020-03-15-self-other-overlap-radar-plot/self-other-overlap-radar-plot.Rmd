@@ -20,9 +20,9 @@ output:
 
 # Introduction 
 
-This is the third visualization in a series of visualization related to the construct of *self-other overlap* - the extent that one sees the other person as part of the self, a sense of shared identity or interconnectedness - across different relationships that varies in closeness (a close person, an acquaintance, or a disliked person). For more background information, please see [my blog post on the first visualization](posts/2020-03-11-ios-mosaic-plot/index.html). 
+This is the third visualization in a series of visualization related to the construct of *self-other overlap* - the extent that one sees the other person as part of the self, a sense of shared identity or interconnectedness - across different relationships that varies in closeness (a close person, an acquaintance, or a disliked person). For more background information, please see [my blog post on the first visualization](https://s-gluck.github.io/blog/posts/2020-03-11-ios-mosaic-plot/). 
 
-I created an Alluvial Plot intended for the general commmunity to visualize the same data from this Radar Plot. Check out [my Alluvial Plot post](add post link here) to see an alternative visualization of the same data. 
+I created an Alluvial Plot intended for the general commmunity to visualize the same data from this Radar Plot. Check out [my Alluvial Plot post](https://s-gluck.github.io/blog/posts/2020-03-13-self-other-overlap-alluvial-plot/) to see an alternative visualization of the same data. 
 
 ## Trait Adjective Checklist 
 
