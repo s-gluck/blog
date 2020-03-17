@@ -1,28 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
-    <title>The Blog of Stephanie Gluck </title>
+    <title>Stephanie Gluck</title>
     <link>https://s-gluck.github.io/blog/</link>
     <atom:link href="https://s-gluck.github.io/blog/index.xml" rel="self" type="application/rss+xml"/>
-    <description>The Blog of Stephanie Gluck 
+    <description>my R journey
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Mon, 24 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Mar 2020 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>First Blog Post</title>
+      <title>Visualize self-other overlap by relationship and valence: Radar plot</title>
       <dc:creator>Stephanie Gluck</dc:creator>
-      <link>https://s-gluck.github.io/blog/posts/2020-02-24-first-blog-post</link>
-      <description>A short description of the post.</description>
-      <guid>https://s-gluck.github.io/blog/posts/2020-02-24-first-blog-post</guid>
-      <pubDate>Mon, 24 Feb 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://s-gluck.github.io/blog/posts/2020-02-24-first-blog-post/first-blog-post_files/figure-html5/plot-ex-1.png" medium="image" type="image/png" width="1248" height="768"/>
+      <link>https://s-gluck.github.io/blog/posts/2020-03-15-self-other-overlap-radar-plot</link>
+      <description>Radar plot to visualize the "area" of overlap score across relationship and valence</description>
+      <guid>https://s-gluck.github.io/blog/posts/2020-03-15-self-other-overlap-radar-plot</guid>
+      <pubDate>Sun, 15 Mar 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://s-gluck.github.io/blog/posts/2020-03-15-self-other-overlap-radar-plot/self-other-overlap-radar-plot_files/figure-html5/radar_p3-1.png" medium="image" type="image/png" width="1344" height="1344"/>
+    </item>
+    <item>
+      <title>Visualize self-other overlap by relationship and valence: Alluvial plot</title>
+      <dc:creator>Stephanie Gluck</dc:creator>
+      <link>https://s-gluck.github.io/blog/posts/2020-03-13-self-other-overlap-alluvial-plot</link>
+      <description>Alluvial plot to visualize the "flow" of self-other overlap data across relationship and valence</description>
+      <guid>https://s-gluck.github.io/blog/posts/2020-03-13-self-other-overlap-alluvial-plot</guid>
+      <pubDate>Fri, 13 Mar 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://s-gluck.github.io/blog/posts/2020-03-13-self-other-overlap-alluvial-plot/self-other-overlap-alluvial-plot_files/figure-html5/alluvial_p3-1.png" medium="image" type="image/png" width="1344" height="1344"/>
+    </item>
+    <item>
+      <title>Visualize the frequency of IOS response across different relationships</title>
+      <dc:creator>Stephanie Gluck</dc:creator>
+      <link>https://s-gluck.github.io/blog/posts/2020-03-11-ios-mosaic-plot</link>
+      <description>Mosaic plot to visualize frquency response for the Inclusion of Other in the Self Scale (IOS)</description>
+      <guid>https://s-gluck.github.io/blog/posts/2020-03-11-ios-mosaic-plot</guid>
+      <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://s-gluck.github.io/blog/posts/2020-03-11-ios-mosaic-plot/ios-mosaic-plot_files/figure-html5/mosaic_plot3-1.png" medium="image" type="image/png" width="2304" height="1728"/>
     </item>
     <item>
       <title>Welcome to The Blog of Stephanie Gluck </title>
       <dc:creator>Stephanie Gluck</dc:creator>
       <link>https://s-gluck.github.io/blog/posts/welcome</link>
-      <description>Welcome to our new blog, The Blog of Stephanie Gluck . We hope you enjoy 
-reading what we have to say!</description>
+      <description>Welcome to my Blog where I hope to share my data analysis R code 
+and practice visualizing my data</description>
       <guid>https://s-gluck.github.io/blog/posts/welcome</guid>
       <pubDate>Mon, 24 Feb 2020 00:00:00 +0000</pubDate>
     </item>

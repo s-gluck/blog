@@ -1,0 +1,297 @@
+---
+title: "Visualize self-other overlap by relationship and valence: Alluvial plot"
+description: |
+  Alluvial plot to visualize the "flow" of self-other overlap data across relationship and valence
+author:
+  - name: Stephanie Gluck
+    url: https://github.com/s-gluck
+date: 03-13-2020
+categories: 
+  - dataviz 
+  - class
+  - alluvial plot
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 2
+---
+
+
+# Introduction 
+
+This is the second visualization in a series of visualization related to the construct of *self-other overlap* - the extent that one sees the other person as part of the self, a sense of shared identity or interconnectedness - across different relationships that varies in closeness (a close person, an acquaintance, or a disliked person). For more background information, please see [my blog post on the first visualization](posts/2020-03-11-ios-mosaic-plot). 
+
+I created a Radar Plot intended for the scientific commmunity to visualize the same data from this Alluvial Plot. Check out [my Radar Plot post](add post link here) to see an alternative visualization of the same data. 
+
+## Trait Adjective Checklist 
+
+Participants in my project completed a trait adjective checklist (Myers & Hodges, 2011, Davis et al., 1996) for themselves and the three relaionship targets (close, acquaintance and dislike) that consisted of 114 adjectives that varied in valence (positive, neutral, negative). An excerpt of the Trait Adjective Checklist is included below: 
+
+Trait Adjective Checklist sample items (total of 114 adjectives). 
+
+Which of the following adjectives do you consider to be descriptive of yourself / [target]? Select all that applies. 
+
+- Adaptable 
+- Aggressive 
+- Clever
+- Curious 
+- Quiet
+- Reserved 
+- Outspoken
+- Rude 
+- Tense 
+- Wholesome 
+
+### Overlap Score
+
+A trait adjective overlap score is then calculated for the participants with their three targets. A valenced (positive, neutral or negative traits) overlap score is also caculated. The overlap score is the proportion of traits that one attributes to the self that is later ascribed to the target. For example, a person whose overlap score with their best friend is 0.6 or 60% can be taken to mean that when this person evaluated their best friend, they attributed 60% of their own traits to their best friend. 
+
+# Data Visualization - Alluvial Plot 
+
+I will use the `ggalluvial` package to create an [Alluvial Plot](https://corybrunson.github.io/ggalluvial/index.html) to visualize the average "flow" of overlap score for the three relationship and further visualize how the overlap score then split into positive, neutral or negative traits.  
+
+The intended audience of the plot is the **general community** and more specifically I hope to create an artistic rendering of my self-other overlap data using the alluvial diagram to generate interest in the community about social cognition research. 
+
+The **intended message** is that when participants think of their own traits and the traits of people from different social relationships that varies in closeness (a close person, an acquaintance, or a disliked person), participants are likely to see more of their own traits (a higher overlap score) in a person they are close with than an acquaintance or disliked person. Participants are also more likely to attribute more postivie traits (relative to neutral or negative) to a closer person or an acquaintance compared to a disliked person. Interestingly, while participants do attribute more negative traits to someone they dislike, participants on average attributed 40% of their negative traits to the disliked person, possibly showing some projection of the self towards the dislike target.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE)
+```
+
+Load packages 
+
+```{r load_package}
+#General packages 
+library(here)
+library(ggplot2)
+library(tidyverse)
+library(readr)
+library(reactable)
+library(pander)
+library(ggtext)
+
+#Alluvial plot 
+#library(alluvial)
+# devtools::install_github('thomasp85/ggforce')
+library(ggforce)
+# devtools::install_github("corybrunson/ggalluvial")
+library(ggalluvial)
+
+```
+
+Load and display the data 
+
+```{r load data}
+
+d <- read_csv(here::here("data", "self_other_overlap_valence.csv"))
+
+reactable(d, height = 400, 
+          striped = TRUE, 
+          compact = TRUE, 
+          outlined = TRUE)
+
+```
+
+Data wrangling 
+
+```{r alluvial_data}
+
+alluvial_d <- d %>% 
+  group_by(relationship, valence) %>% 
+  summarize(mean = mean(self_percent, na.rm = T)*100) %>% 
+  mutate(self = paste("Self")) %>% 
+  ungroup() %>%  
+  mutate(valence = str_to_title(valence), 
+         relationship = as.factor(relationship), 
+         valence = as.factor(valence)) %>%  
+  mutate(relationship = fct_relevel(relationship, "close_overlap",
+                                    "acq_overlap", 
+                                    "dislike_overlap"),
+         valence = fct_relevel(valence, "Positive", "Neutral", "Negative"),
+         relationship = recode(relationship, 
+                               "close_overlap" = "Close Person", 
+                               "acq_overlap" = "Acquaintance", 
+                               "dislike_overlap" = "Disliked Person"))
+
+head(alluvial_d)
+
+```
+
+This is the data I intend to summarize with my Alluvial plot. The mean denotes mean percent overlap score which is calculated as the proportion of traits that one attributes to the self that is later ascribed to the target. 
+
+```{r alluvial_table}
+pander(alluvial_d[1:3])
+```
+
+## Alluvial Plot 1 
+
+In the first rendering of the alluvial plot, I didn't deviate from the standard default code used to generate the alluvial plot. As the alluvial plot was completely new to me prior to the project, my first attempt was simply to make sure I could generate a plot. 
+
+While changes can certainly be made to the default alluvial plot, the default plot is also not too shabby. My alluvial plot contains three axes (Self, Relationship and Valence columns) and within each axes there are various strata such as within the relationship axis, there are three strata: close, acquaintance and dislike person. The alluvia are the horizontal "flow" of my data and each band denotes the average percent overlap score.
+
+```{r alluvial_p1}
+
+ggplot(alluvial_d, aes(y = mean, axis1 = self, axis2 = relationship, axis3 = valence)) +
+  geom_alluvium(aes(fill = relationship)) + 
+  geom_stratum() +
+  geom_text(stat = "stratum", infer.label = T)
+
+```
+
+## Alluvial Plot 2 
+
+For the second iteration of my alluvial plot, I played around with the aesthetic settings of the alluvial plot and also ggplot to make my plot more visually appealing and hopefully easier to understand. I made the following changes: 
+
+- For my data and plot, the default axis label did not really make sense for interpretation. I changed the X axis label to denote each axes (Self, Relationship, Valence)
+- Changed Y axis label to overlap score (%) to indicate the units that represent my alluvia.
+- Used `geom_label` to add labels to the strata within each axes (e.g., for Relationship axis, I added the strata label Close Person, Acquaintance and Disliked Person)
+- Changed the color of my fill to the brewer `palette = "Dark2"`
+- Added a title and subtitle to the plot
+- Added a caption to indicate sample size 
+
+While the second plot was an improvement from the first plot, I didn't think my second plot could stand alone, it would be hard for reader to judge the Y axis or percent score since no tick marks were readily available, and I think it would be diffuclt for a general community audience to understand my title and subtitle. 
+
+### Plot 2.1
+```{r alluvial_p2.1, fig.width = 6, fig.height = 6}
+
+ggplot(alluvial_d, aes(y = mean, axis1 = self, axis2 = relationship, axis3 = valence)) +
+  geom_alluvium(aes(fill = relationship), width = 1/12,  knot.pos = .2) +
+  geom_stratum(width = 1/6, fill = "gray70", color = "gray40") +
+  geom_label(stat = "stratum", infer.label = TRUE) +
+  scale_x_discrete(limits = c("Self", "Relationship", "Valence"),
+                   expand = c(.05, .05)) +
+  theme_minimal(16) + 
+  scale_fill_brewer(palette = "Dark2") + 
+  guides(fill = FALSE) + 
+    labs(x = "",
+       y = "Overlap Score (%)",
+       title = "Self-Other Overlap Scores from Adjective Checklist", 
+       subtitle = "By Relationship Closeness and Valence", 
+       caption = "N = 155") + 
+  theme(plot.title.position = "plot", 
+        legend.position = "none",
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(), 
+        panel.grid = element_blank())
+
+```
+
+### Plot 2.2 - coord_flip()
+
+During my peer review feedback, [Claire Zhang](https://github.com/claireconglizhang) had helpfully recommended attemtping to `coord_flip()` the alluvial plot for the labels to fit better in each strata and to free up more space to showcase the visual created by the alluvia. 
+
+Here is a coord_flip version of the same alluvial plot as above witih some slight change in text color. One thing to note for the coord_flip version of the plot is that both the Close Person and Positive valence are on the right side of the plot rather than the left. For ease of interpretation such that closeness and valence are in a descending order (closest to least close; positive to negative), I would need to re-order my factors. 
+
+```{r alluvial_p2.2, fig.width = 6, fig.height = 6}
+
+ggplot(alluvial_d, aes(y = mean, axis1 = valence, axis2 = relationship, axis3 = self)) +
+  geom_alluvium(aes(fill = relationship), width = 1/12, knot.pos = .2) +
+  geom_stratum(width = 1/6, fill = "gray70", color = "gray30") +
+  geom_text(stat = "stratum", infer.label = TRUE, color = "white") +
+  theme_minimal(16) + 
+  scale_fill_brewer(palette = "Dark2") + 
+  guides(fill = FALSE) + 
+    labs(x = "",
+       y = "",
+       title = "Self-Other Overlap Scores from Adjective Checklist", 
+       subtitle = "By Relationship Closeness and Valence", 
+       caption = "N = 155") + 
+  theme(plot.title.position = "plot", 
+        legend.position = "none",
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(), 
+        axis.text = element_blank(), 
+        panel.grid= element_blank()) + 
+  coord_flip()
+```
+
+## Alluvial Plot 3 
+
+In the final iteration of my alluvial plot, I decided to create a more "artistic" rendering of my visualization and also attempt to use the manual `annnotate` function to create text annotations right on the alluvial plot and remove some of the strata labels to clean up the plot. Updates made to the final plot includes: 
+
+- A lot of `annontate` to manually insert the relationship level label, trait valence label and overlap percent score in the desired location within the alluvial plot. There was a lot of trial and error to try to get the annotation in the "right" spot. 
+- Used `geom_rect` to manually draw rectangles that serves as my axes and strata indicators. 
+- Removed the X and Y axis title. I wanted to use the annotation on my alluvial plot, along with the title, subtitle and caption to deliver the intended message of my plot. 
+- Added what I hope is a general community audience friendly title. 
+- Added subtitle to provide additional information about the different relationship closeness level and valence of the traits. 
+- Added caption to provide concrete example of positive, neutral and negative traits. Caption also provided the total sample size. I utilized `ggtext` to insert html formatting - bold, italic, new parargaph - in my caption.  
+- Lastly, I added an arrow using `annotate` and `geom = segment` and provided a small explanation about the interpretation of the overlap percent score, which I hope will help the audience with the interpretation of the subsequent overlap percent score. 
+
+```{r alluvial_p3, fig.width = 7, fig.height = 7, layout = "l-body-outset", preview = TRUE}
+
+ggplot(alluvial_d, aes(y = mean, axis1 = self, axis2 = relationship, axis3 = valence)) +
+  geom_alluvium(aes(fill = relationship), width = 1/12, knot.pos = .2) + 
+  annotate("text", x = 1.5, y = 207, 
+           label = "Close Person", 
+           color = "gray30", size = 6) + 
+  annotate("text", x = 1.5, y = 111, 
+           label = "Acquaintance", 
+           color = "gray30", size = 6) +
+  annotate("text", x = 1.5, y = 37, 
+           label = "Disliked Person", 
+           color = "gray30", size = 6) + 
+  geom_rect(xmin = 3, xmax = 3.1, ymin = 0, ymax = 77, 
+            fill = "gray40", color = "white", size = 0.1) + 
+  geom_rect(xmin = 3, xmax = 3.1, ymin = 77, ymax = 155, 
+            fill = "gray40", color = "white", size = 0.1) +
+  geom_rect(xmin = 3, xmax = 3.1, ymin = 155, ymax = 268.5, 
+            fill = "gray40", color = "white", size = 0.1) +
+  annotate("text", x = 3.05, y = 40, label = "Negative", 
+           color = "white", angle = 90, size = 6) + 
+  annotate("text", x = 3.05, y = 118, label = "Neutral", 
+           color = "white", angle = 90, size = 6) + 
+  annotate("text", x = 3.05, y = 210, label = "Positive", 
+           color = "white", angle = 90, size = 6) + 
+  annotate("text", x = 2.92, y = 238, label = "59%", 
+           color = "gray30", size = 4) +
+  annotate("text", x = 2.92, y = 140, label = "32%", 
+           color = "gray30", size = 4) +
+  annotate("text", x = 2.92, y = 65, label = "29%", 
+           color = "gray30", size = 4) +
+  annotate("text", x = 2.92, y = 187, label = "41%", 
+           color = "gray30", size = 4) +
+  annotate("text", x = 2.92, y = 112, label = "21%", 
+           color = "gray30", size = 4) +
+  annotate("text", x = 2.92, y = 43, label = "11%", 
+           color = "gray30", size = 4) +
+  annotate("text", x = 2.92, y = 161, label = "13%", 
+           color = "gray30", size = 4) +
+  annotate("text", x = 2.92, y = 90, label = "25%", 
+           color = "gray30", size = 4) +
+  annotate("text", x = 2.92, y = 18.5, label = "37%", 
+           color = "gray30", size = 4) +
+  geom_rect(xmin = 0.9, xmax = 1, ymin = 0, ymax = 268.5, 
+            fill = "gray40", color = "white", size = 0.1) +
+  annotate("text", x = .95, y = 134, label = "Self", 
+           color = "white", angle = 90, size = 6) + 
+  annotate(geom = "segment", color = "gray30", 
+           x = 2.73, y = 238, xend = 2.83, yend = 238, 
+           arrow = arrow(length = unit(2, "mm"))) +
+  annotate("text", x = 2.71, y = 238, 
+           label = "On average, participants associated \n59% of their own positive traits toward\na best friend or significant other", 
+           color = "gray20", size = 2.7, hjust = "right") +
+  scale_fill_brewer(palette = "Dark2") +
+  theme_minimal(12) +
+  theme(legend.position = "none", 
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(), 
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        panel.grid= element_blank(), 
+        plot.title.position = "plot",
+        plot.title = element_text(face = "bold"),
+        plot.caption = element_markdown()) + 
+  labs(title = "The merging of self and other: Percent of traits associated \nwith the self that is also applied to another person", 
+       subtitle = "Grouped by relationship closeness and trait valence", 
+       caption = "Example of <b>positive traits</b>: attractive, clever, self-confident;
+       <p><b>neutral traits</b>: deliberate, frank, shy;
+       <p><b>negative traits</b>: messy, rude, immature. (<i>N</i> = 155)") 
+
+```
+
+

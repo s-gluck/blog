@@ -1,9 +1,21 @@
 ---
-title: "About this blog"
+title: "About"
 description: |
-  Some additional details about the blog
+  A bit more about me and my blog
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+### Hello, I am Stephanie Gluck 
+
+I am a PhD student in the Department of Psychlogy at the University of Oregon working with Dr. Louis Moses in the [Developing Mind Lab](https://developingmind.uoregon.edu). My research addresses how children become socially aware of others’ thoughts, intentions and emotions – a crucial ability for success in the social world – along with the underlying social and cognitive mechanisms that influence such development.
+
+I also work with Dr. Sara Hodges in the [Social Cognition Lab](https://socialcognitionlab.uoregon.edu) where I am examining individuals' tendency to attribute mind-like and intentional qualities in how they represent others. 
+
+In working torwards open science and reproducibility, I hope to share my data analysis `R` code in my blog and use the blog to practice data visuzalition of my work for a wide array of audience. 
+
+### Contact 
+
+You can reach me via email: sgluck at uoregon dot edu

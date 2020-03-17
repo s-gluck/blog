@@ -1,0 +1,207 @@
+---
+title: "Visualize self-other overlap by relationship and valence: Radar plot"
+description: |
+  Radar plot to visualize the "area" of overlap score across relationship and valence
+author:
+  - name: Stephanie Gluck
+    url: https://github.com/s-gluck
+date: 03-15-2020
+categories: 
+  - dataviz 
+  - class
+  - radar plot
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 2
+---
+
+
+# Introduction 
+
+This is the third visualization in a series of visualization related to the construct of *self-other overlap* - the extent that one sees the other person as part of the self, a sense of shared identity or interconnectedness - across different relationships that varies in closeness (a close person, an acquaintance, or a disliked person). For more background information, please see [my blog post on the first visualization](posts/2020-03-11-ios-mosaic-plot/index.html). 
+
+I created an Alluvial Plot intended for the general commmunity to visualize the same data from this Radar Plot. Check out [my Alluvial Plot post](add post link here) to see an alternative visualization of the same data. 
+
+## Trait Adjective Checklist 
+
+Participants in my project completed a trait adjective checklist (Myers & Hodges, 2011, Davis et al., 1996) for themselves and three relaionship targets (close, acquaintance and dislike) that consisted of 114 adjectives that varied in valence (positive, neutral, negative). An excerpt of the Trait Adjective Checklist is included below: 
+
+Trait Adjective Checklist sample items (total of 114 adjectives). 
+
+Which of the following adjectives do you consider to be descriptive of yourself / [target]? Select all that applies. 
+
+- Adaptable 
+- Aggressive 
+- Clever
+- Curious 
+- Quiet
+- Reserved 
+- Outspoken
+- Rude 
+- Tense 
+- Wholesome 
+
+### Overlap Score
+
+A trait adjective overlap score is then calculated for the participants with their three targets. A valenced (positive, neutral or negative traits) overlap score is also caculated. The overlap score is the proportion of traits that one attributes to the self that is later ascribed to the target. For example, a person whose overlap score with their best friend is 0.6 or 60% can be taken to mean that when this person evaluated their best friend, they attributed 60% of their own traits to their best friend. 
+
+# Data Visualization - Radar Plot 
+
+I will use the `ggiraphExtra` package to create a [Radar Plot](https://rpubs.com/cardiomoon/231820) to visualize the average "area" of overlap score for the three relationship and further visualize how the overlap score are distributed into positive, neutral or negative traits.  
+
+The intended audience of the plot is the **scientific community** and more specifically I can see this type of visualization working well in talks, presentations and poster sessions. I can also see that if the plot was printed in black and white, it could potentially be difficult to interpret, especially if no legend is present such as my final plot, making the radar plot less effective to include in journal publication.
+
+The **intended message** is that when participants think of their own traits and the traits of people from different social relationships that varies in closeness (a close person, an acquaintance, or a disliked person), participants are likely to see more of their own traits (a higher overlap score) in a person they are close with than an acquaintance or disliked person. Participants are also more likely to attribute more postivie traits (relative to neutral or negative) to a closer person or an acquaintance compared to a disliked person. Interestingly, while participants do attribute more negative traits to someone they dislike, participants on average attributed 40% of their negative traits to the disliked person, possibly showing some projection of the self towards the dislike target.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE)
+```
+
+Load packages 
+
+```{r load_package}
+#General packages 
+library(here)
+library(ggplot2)
+library(tidyverse)
+library(readr)
+library(reactable)
+library(pander)
+library(ggtext)
+
+#Radar Plot 
+library(ggiraphExtra)
+
+```
+
+Load and display the data 
+
+```{r load data}
+
+d <- read_csv(here::here("data", "self_other_overlap_valence.csv"))
+
+reactable(d, height = 400, 
+          striped = TRUE, 
+          compact = TRUE, 
+          outlined = TRUE)
+
+```
+
+Data wrangling 
+
+```{r radar_data}
+
+radar_d <- d %>% 
+  group_by(relationship, valence) %>% 
+  summarize(mean = mean(self_percent, na.rm = T)*100) %>% 
+  ungroup() %>%  
+  mutate(valence = str_to_title(valence), 
+         relationship = as.factor(relationship), 
+         valence = as.factor(valence)) %>%  
+  mutate(relationship = fct_relevel(relationship, "close_overlap",
+                                    "acq_overlap", 
+                                    "dislike_overlap"),
+         valence = fct_relevel(valence, "Positive", "Neutral", "Negative"),
+         relationship = recode(relationship, 
+                               "close_overlap" = "Close Person", 
+                               "acq_overlap" = "Acquaintance", 
+                               "dislike_overlap" = "Disliked Person")) %>% 
+  pivot_wider(names_from = valence, values_from = mean)
+
+```
+
+This is the data I intend to summarize with my Radar plot. The numeric values denote mean percent overlap score which is calculated as the proportion of traits that one attributes to the self that is later ascribed to the target. 
+
+```{r radar_table}
+pander(radar_d)
+```
+
+## Radar Plot 1
+
+To create a radar plot for my visualization. I initially attempted to create my radar plot using `ggradar` but found that the `ggradar` pacakge was not flexible at handling non-scaled data. Consultation with [stack overflow](https://stackoverflow.com/questions/55243307/how-to-use-ggradar-without-rescale-changing-the-results) and the [developer's github](https://github.com/ricardo-bion/ggradar/issues/7) didn't seem to provide a solution that did not require data rescaling. I later came across the `ggiraphExtra` package and decided to use that for my viusalization. 
+
+Similar to the Alluvial Plot, the Radar Plot was also completey new to me prior to this project. My first attempt at my radar plot visualization is to hope I have supplied the correct data format to `ggiraphExtra` to produce a radar plot. 
+
+As seen below, in my first rendition of the radar plot, I was able to get the general visualization that I was hoping to achieve. It is also nice that the positive and negative valence are located on opposite end of the plot while neutral was at the bottom. This allowed my radar areas to spread out nicely and one can easily see the polar opposite direction of positive and negative trait adjective distribution between the close person compared to the disliked person. Furthermore, the overall area for the close person is larger compared to an acquaintance or disliked person (e.g., overall greater overlap score in all valence for someone you are close with than for less close targets).
+
+The major challenge I encountered working with the radar plot is the difficulty at understanding and customizing the X & Y axis and in particular the X axis (which creates the raial effect of the plot). Also, I was not able to understand why the Y axis scale generated by default for the plot was incorrect (values are off by 10) 
+
+```{r radar_p1}
+
+ggRadar(data = radar_d, aes(group=relationship), rescale = FALSE)
+
+```
+
+## Radar Plot 2
+
+In the second iteration of the radar plot: 
+
+- I wanted to clean up the looks of my plot so I changed the theme to `theme_minial()`.  
+- I applied the same r color brewer `palette = "Dark2"` as my alluvial plot to keep my colors consistent across the same dataset. 
+- I moved the legend from the top to the bottom to make the legend less distracting. 
+
+More Areas of improvement: 
+
+- Definitely need to fix the Y axis scale as the values are incorrect which would mislead my audience. Preferably have the Y axis scale embeded in the radar plot as it is difficult to interpret off to the side. 
+- Eliminate the legend if possible, such as through in plot annotation or utilizing colored plot caption. 
+
+```{r radar_p2}
+ggRadar(data = radar_d, aes(color = relationship), rescale = FALSE) + 
+  theme_minimal(14) + 
+  theme(legend.position = "bottom") + 
+  scale_color_brewer(palette = "Dark2") +
+  scale_fill_brewer(palette = "Dark2") 
+```
+
+## Radar Plot 3
+
+In the final iteration of my radar plot, I made changes that enabled my radar plot to be a stand-alone visualization: 
+
+- Used `annotate` to manually add in the correct Y axis scale. 
+- After adding the correct Y axis scale manually using `annotate`, I didn't really understand why the position of my valence nodes shifted on the radar plot. 
+- Added a title to my plot. 
+- Added subtitle to provide additional information about the different relationship closeness level and valence of the traits. 
+- Added caption to provide concrete example of positive, neutral and negative traits. Caption also provided the total sample size. I utilized `ggtext` to insert html formatting - bold, italic, new parargaph - in my caption.  
+
+```{r radar_p3, fig.width = 7, fig.height = 7, layout = "l-body-outset", preview = TRUE}
+
+ggRadar(data = radar_d, aes(color = relationship), rescale = FALSE) + 
+  theme_minimal(13) + 
+  theme(axis.text.y = element_blank(), 
+        legend.position = "none") + 
+  annotate("text", x = 0, y = 20, label = "20%", color = "gray30") + 
+  annotate("text", x = 0, y = 30, label = "30%", color = "gray30") +
+  annotate("text", x = 0, y = 40, label = "40%", color = "gray30") +
+  annotate("text", x = 0, y = 50, label = "50%", color = "gray30") +
+  annotate("text", x = 0, y = 60, label = "60%", color = "gray30") +
+  scale_color_brewer(palette = "Dark2") + 
+  scale_fill_brewer(palette = "Dark2") + 
+  labs(y = "", 
+       title = "Mean self-other overlap score from the Trait Adjective Checklist",
+       subtitle = "By relationship (<span style = 'color : #1b9e77'>close person</span>,<span style = 'color : #d95f02'> acquaintance</span>,<span style = 'color : #7570b3'> disliked person</span>) <p>and trait valence", 
+       caption = "Example of <b>positive traits</b>: attractive, clever, self-confident;
+       <p><b>neutral traits</b>: deliberate, frank, shy;
+       <p><b>negative traits</b>: messy, rude, immature. (<i>N</i> = 155)") + 
+  theme(legend.position = "none", 
+        plot.subtitle = element_markdown(),
+        plot.caption = element_markdown(),
+        plot.title.position = "plot")
+
+
+```
+
+## Extra Radar Plot - interactive
+
+One of the main feature of `ggiraphExtra` is the ability to add [interactive plots](https://cran.r-project.org/web/packages/ggiraphExtra/vignettes/introduction.html). I tested this function out by simply assinging `ggRadar(interactive = TRUE)`. I also tried to play around with changing additional aesthetic features of the plot such as theme and color palettes but it didn't look like those options work with the interactive plot which may limit the appicability of the interactive radar plot. 
+
+```{r radar_p4}
+ggRadar(data = radar_d, aes(color = relationship), 
+        rescale = FALSE, interactive = TRUE)
+```
+

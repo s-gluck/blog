@@ -1,0 +1,185 @@
+---
+title: "Visualize the frequency of IOS response across different relationships"
+description: |
+  Mosaic plot to visualize frquency response for the Inclusion of Other in the Self Scale (IOS)
+author:
+  - name: Stephanie Gluck
+    url: https://github.com/s-gluck
+date: 03-11-2020
+categories: 
+  - dataviz 
+  - class
+  - mosaic plot
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 2
+---
+
+# Introduction 
+
+I have a dataset that examines how individuals evaluate their social relationships that vary in the degree of closeness – a person they are close with, an acquaintance and a dislike person – and the extent to which they report a self-other overlap with that person. *Self-other overlap*, in close relationship can be broadly defined as the extent that one sees the other person as part of the self, a sense of shared identity or interconnectedness (Aron et al., 1991).   
+
+Participants completed measures of relationship closeness and self-other overlap for all three relationship targets: 
+
+1) A person they are close with (significant other or best friend)
+2) An acquaintance
+3) A disliked person
+
+I hope to visualize my relationship data through a series of visualization on my blog. These series of visualizations also serve as a project for the class EDLD610, [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-dataviz-2020/index.html) taught by [Daniel Anderson](https://github.com/datalorax) at the University of Oregon. 
+
+# Data Visualization - Mosaic Plot 
+
+For the first visualization, I want to visualize the frquency of responses that participants (N = 155) selected for the Inclusion of Other in the Self Scale (Aron et al., 1992; IOS) for the different targets that varied in closeness. I hypothesize that participatns are more likely to indicate closeness – greater overlap in their cricles – in the close relatioship (a best friend or significant other) compared to an acquaintance or a disliked person.
+
+The IOS is a one item measure consisting of seven pair of circle – with one circle representing the self and the other representing another person – that vary in the extent to which the circle overlap with each other.
+
+1 = Self and Other as separte circles that do not overlap (top left)
+
+7 = Self and Other as the most overlapped cirle (bottom right)
+
+![IOS; Please cirlce the picture below which best describes your relationship](ios.png)
+
+I will use the `ggmosaic` package to create a [Mosaic Plot](https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html) to visualize the frequency of IOS response from participants for the three different relationships. 
+
+The intended audience of the plot is the **scientific community** and more specifically I can see this type of visualization working well in talks, presentations and poster sessions. I can also see that if the plot was printed in black and white, it could potentially be difficult to interpret, making it less effective to include in journal publication. 
+
+The **intended message** is that for self-other-overlap as measured by the IOS, most participants will select no to barely any overlap between themselves and an acquaintance. This effect is even more pronounced for a disliked person, with more than half of the participants selecting no overlap with the disliked person. Interestingly, for the close target (Best friend or significant other), participants are much more variable at utilizing the IOS scale, suggesting that there are variability within individuals in how they view the relationship between themselves and the person they are close with. 
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE)
+```
+
+Load packages 
+
+```{r load_package}
+
+#General packages 
+library(here)
+library(ggplot2)
+library(tidyverse)
+library(readr)
+library(reactable)
+library(knitr)
+
+#Mosaic plot 
+library(ggmosaic)
+
+```
+
+Load and display the data 
+
+```{r load data}
+
+d <- read_csv(here::here("data", "self_other_overlap_data.csv"))
+
+reactable(round(d, 2), 
+          height = 400, 
+          striped = TRUE, 
+          compact = TRUE, 
+          outlined = TRUE)
+
+```
+
+Data wrangling 
+
+```{r mosaic_data}
+
+#data wrangling 
+mosaic_d <- d %>% select(contains("IOS")) %>% 
+  pivot_longer(1:3, names_to = "relationship", values_to = "IOS") %>%  
+  mutate_if(is.numeric, as.factor) %>% 
+  mutate(relationship = as.factor(relationship)) %>% 
+  mutate(relationship = recode(relationship, "close_IOS" = "Best Friend or Significant Other", 
+                               "acq_IOS" = "Acquaintance", 
+                               "dislike_IOS" = "Disliked Person"), 
+         relationship = fct_relevel(relationship, "Best Friend or Significant Other", 
+                                    "Acquaintance", 
+                                    "Disliked Person")) 
+
+head(mosaic_d)
+```
+
+This is the data I intended to summarize with my mosaic plot 
+
+```{r mosaic_table}
+
+mosaic_table <- mosaic_d %>% 
+  group_by(relationship, IOS) %>% 
+  drop_na() %>% 
+  count
+
+knitr::kable(mosaic_table)
+
+```
+
+## Mosaic Plot 1 
+
+At the most basic level, the mosaic plot summarized the frequency that particiants selected each of the seven pair of circle. With 1 being the self and the other as separate circles that do not overlap to 7 being the self and other as the most overlapped circle. The first iteration of the plot simply showed the overall frequency collapsed across the three different social relationships. Given the difference in relationship closeness between the three social relationship - close person, acquaintance, and disliked person - the visualization will be more meaningful if it was separated by relationship type.
+
+```{r mosaic_plot}
+ggplot(data = mosaic_d) +
+  geom_mosaic(aes(x = product(IOS), fill=IOS), na.rm=TRUE) 
+
+```
+
+## Mosaic Plot 2 
+
+For the second version of the mosaic plot, I facet wrapped by relationship to better differentiate the IOS response participants were selecting for the different social relationship. I also decicded to facet wrap by row rather than column. As seen below, the facet wrap by column produced very narrow bands making some of the lower frequency count columns difficult to see. 
+
+The second version of the plot conveys the overall data but the current plot would not be able to stand-alone. There is no title for the plot, the X and Y axis title has no meaning, and it would be difficult to interpret the values in the IOS legend. Aesthetic wise, the gray box and gridline within each mosaic plot distract from the overall mosaic plot.  
+
+### Facet wrap by row 
+```{r mosaic_plot2}
+
+ggplot(data = mosaic_d) +
+  geom_mosaic(aes(x = product(IOS), fill=IOS), na.rm=TRUE) + 
+    facet_wrap(~relationship, nrow = 3)
+
+```
+
+### Facet wrap by column 
+
+When facet wrap by column, it is dificult to see the bands with lower frequency, making the plot less effective at communicating how participants' are rating their percieved self-other-overlap with the different targets. 
+
+```{r mosaic_plot_col}
+ggplot(data = mosaic_d) +
+  geom_mosaic(aes(x = product(IOS), fill=IOS), na.rm=TRUE) + 
+    facet_wrap(~relationship, ncol = 3)
+```
+
+## Mosaic Plot 3 
+
+In the final version of the plot, I made aesthetic and information related changes to increase the visual aesthetic and interpretation of the mosaic plot. The plot can now stand alone and be interpretable. 
+
+- The Y axis label was removed. The X axis was renamed to "Frequency". 
+- Added a title to the plot and caption to indicate sample size and more information about the scale. 
+- Added text to the legend to refer readers to the meaning of the IOS scale value
+- Implemented `theme_minimal()` and set `panel.grid = element_blank()` to clean up the mosaic plot.
+- Used the viridis color palette for accessibility 
+
+```{r mosaic_plot3, fig.width = 12, fig.height = 9, layout = "l-body-outset", preview = TRUE}
+
+viridis<- c("#440154ff","#43377fff","#31668dff","#21908dff","#37b578ff","#8fd543ff","#fde725ff")
+
+ggplot(data = mosaic_d) +
+  geom_mosaic(aes(x = product(IOS), fill=IOS), na.rm=TRUE) +
+  facet_wrap(~relationship, nrow = 3) + 
+  labs(x = "Frequency", 
+       y = "", 
+       title = "Distribution of IOS Response by Relationship Closeness", 
+       caption = "N = 155 \n IOS = Inclusion of Other in the Self Scale (Aron et al., 1992)") + 
+  theme_minimal(20) + 
+  theme(plot.title.position = "plot", 
+        panel.grid = element_blank(), 
+        legend.text = element_text(size = 11)) +
+  scale_fill_manual(breaks = c("1", "2", "3", "4", "5", "6", "7"), 
+                    labels = c("1 = no \noverlap", "2", "3", "4", "5", "6","7 = most \noverlap"), 
+                    values = viridis)
+
+```

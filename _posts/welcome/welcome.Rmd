@@ -1,8 +1,8 @@
 ---
 title: "Welcome to The Blog of Stephanie Gluck "
 description: |
-  Welcome to our new blog, The Blog of Stephanie Gluck . We hope you enjoy 
-  reading what we have to say!
+  Welcome to my Blog where I hope to share my data analysis R code 
+  and practice visualizing my data
 author:
   - name: Stephanie Gluck
     url: https://github.com/s-gluck

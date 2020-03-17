@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+  <!--radix_placeholder_meta_tags-->
+<title>Stephanie Gluck: Visualize self-other overlap by relationship and valence: Radar plot</title>
+
+<meta property="description" itemprop="description" content="Radar plot to visualize the &quot;area&quot; of overlap score across relationship and valence"/>
+
+<link rel="canonical" href="https://s-gluck.github.io/blog/posts/2020-03-15-self-other-overlap-radar-plot/"/>
+
+<!--  https://schema.org/Article -->
+<meta property="article:published" itemprop="datePublished" content="2020-03-15"/>
+<meta property="article:created" itemprop="dateCreated" content="2020-03-15"/>
+<meta name="article:author" content="Stephanie Gluck"/>
+
+<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+<meta property="og:title" content="Stephanie Gluck: Visualize self-other overlap by relationship and valence: Radar plot"/>
+<meta property="og:type" content="article"/>
+<meta property="og:description" content="Radar plot to visualize the &quot;area&quot; of overlap score across relationship and valence"/>
+<meta property="og:url" content="https://s-gluck.github.io/blog/posts/2020-03-15-self-other-overlap-radar-plot/"/>
+<meta property="og:image" content="https://s-gluck.github.io/blog/posts/2020-03-15-self-other-overlap-radar-plot/self-other-overlap-radar-plot_files/figure-html5/radar_p3-1.png"/>
+<meta property="og:image:width" content="1344"/>
+<meta property="og:image:height" content="1344"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:site_name" content="Stephanie Gluck"/>
+
+<!--  https://dev.twitter.com/cards/types/summary -->
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="Stephanie Gluck: Visualize self-other overlap by relationship and valence: Radar plot"/>
+<meta property="twitter:description" content="Radar plot to visualize the &quot;area&quot; of overlap score across relationship and valence"/>
+<meta property="twitter:url" content="https://s-gluck.github.io/blog/posts/2020-03-15-self-other-overlap-radar-plot/"/>
+<meta property="twitter:image" content="https://s-gluck.github.io/blog/posts/2020-03-15-self-other-overlap-radar-plot/self-other-overlap-radar-plot_files/figure-html5/radar_p3-1.png"/>
+<meta property="twitter:image:width" content="1344"/>
+<meta property="twitter:image:height" content="1344"/>
+
+<!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+<script type="text/json" id="radix-rmarkdown-metadata">
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","categories","output","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Visualize self-other overlap by relationship and valence: Radar plot"]},{"type":"character","attributes":{},"value":["Radar plot to visualize the \"area\" of overlap score across relationship and valence"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Stephanie Gluck"]},{"type":"character","attributes":{},"value":["https://github.com/s-gluck"]}]}]},{"type":"character","attributes":{},"value":["03-15-2020"]},{"type":"character","attributes":{},"value":["dataviz","class","radar plot"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]}]}]},{"type":"character","attributes":{},"value":["https://s-gluck.github.io/blog/posts/2020-03-15-self-other-overlap-radar-plot/"]}]}
+</script>
+<!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["self-other-overlap-radar-plot_files/bowser-1.9.3/bowser.min.js","self-other-overlap-radar-plot_files/core-js-2.5.3/LICENSE","self-other-overlap-radar-plot_files/core-js-2.5.3/package.json","self-other-overlap-radar-plot_files/core-js-2.5.3/shim.min.js","self-other-overlap-radar-plot_files/d3-5.7.0/d3.min.js","self-other-overlap-radar-plot_files/d3-lasso-0.0.5/d3-lasso.min.js","self-other-overlap-radar-plot_files/d3-lasso-0.0.5/lasso.js","self-other-overlap-radar-plot_files/distill-2.2.21/template.v2.js","self-other-overlap-radar-plot_files/figure-html5/radar_p1-1.png","self-other-overlap-radar-plot_files/figure-html5/radar_p2-1.png","self-other-overlap-radar-plot_files/figure-html5/radar_p3-1.png","self-other-overlap-radar-plot_files/figure-html5/radar_p3-2.png","self-other-overlap-radar-plot_files/figure-html5/unnamed-chunk-1-1.png","self-other-overlap-radar-plot_files/ggiraphjs-0.2.0/ggiraphjs.min.js","self-other-overlap-radar-plot_files/ggiraphjs-0.2.0/styles.css","self-other-overlap-radar-plot_files/girafe-binding-0.7.0/girafe.js","self-other-overlap-radar-plot_files/htmlwidgets-1.3/htmlwidgets.js","self-other-overlap-radar-plot_files/jquery-1.11.3/jquery.min.js","self-other-overlap-radar-plot_files/react-16.12.0/AUTHORS","self-other-overlap-radar-plot_files/react-16.12.0/LICENSE.txt","self-other-overlap-radar-plot_files/react-16.12.0/react-dom.min.js","self-other-overlap-radar-plot_files/react-16.12.0/react.min.js","self-other-overlap-radar-plot_files/reactable-binding-0.1.0.1/reactable.js","self-other-overlap-radar-plot_files/reactable-binding-0.1.0/reactable.js","self-other-overlap-radar-plot_files/reactwidget-1.0.0/react-tools.js","self-other-overlap-radar-plot_files/reactwidget-1.0.0/react-tools.js.map","self-other-overlap-radar-plot_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+
+<script type="application/javascript">
+
+  window.headroom_prevent_pin = false;
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // initialize headroom for banner
+    var header = $('header').get(0);
+    var headerHeight = header.offsetHeight;
+    var headroom = new Headroom(header, {
+      onPin : function() {
+        if (window.headroom_prevent_pin) {
+          window.headroom_prevent_pin = false;
+          headroom.unpin();
+        }
+      }
+    });
+    headroom.init();
+    if(window.location.hash)
+      headroom.unpin();
+    $(header).addClass('headroom--transition');
+
+    // offset scroll location for banner on hash change
+    // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+    window.addEventListener("hashchange", function(event) {
+      window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+    });
+
+    // responsive menu
+    $('.distill-site-header').each(function(i, val) {
+      var topnav = $(this);
+      var toggle = topnav.find('.nav-toggle');
+      toggle.on('click', function() {
+        topnav.toggleClass('responsive');
+      });
+    });
+
+    // nav dropdowns
+    $('.nav-dropbtn').click(function(e) {
+      $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      $(this).parent().siblings('.nav-dropdown')
+         .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $("body").click(function(e){
+      $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $(".nav-dropdown").click(function(e){
+      e.stopPropagation();
+    });
+  });
+</script>
+
+<style type="text/css">
+
+/* Theme (user-documented overrideables for nav appearance) */
+
+.distill-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #455a64;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.distill-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.distill-site-nav a:hover {
+  color: white;
+}
+
+@media print {
+  .distill-site-nav {
+    display: none;
+  }
+}
+
+.distill-site-header {
+
+}
+
+.distill-site-footer {
+
+}
+
+
+/* Site Header */
+
+.distill-site-header {
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.distill-site-header .nav-left {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header .nav-left {
+    margin-left: 0;
+  }
+}
+
+
+.distill-site-header .nav-right {
+  float: right;
+  margin-right: 8px;
+}
+
+.distill-site-header a,
+.distill-site-header .title {
+  display: inline-block;
+  text-align: center;
+  padding: 14px 10px 14px 10px;
+}
+
+.distill-site-header .title {
+  font-size: 18px;
+}
+
+.distill-site-header .logo {
+  padding: 0;
+}
+
+.distill-site-header .logo img {
+  display: none;
+  max-height: 20px;
+  width: auto;
+  margin-bottom: -4px;
+}
+
+.distill-site-header .nav-image img {
+  max-height: 18px;
+  width: auto;
+  display: inline-block;
+  margin-bottom: -3px;
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .distill-site-header .logo img {
+    display: inline-block;
+  }
+  .distill-site-header .nav-left {
+    margin-left: 20px;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 20px;
+  }
+  .distill-site-header .title {
+    padding-left: 12px;
+  }
+}
+
+
+.distill-site-header .nav-toggle {
+  display: none;
+}
+
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-dropdown .nav-dropbtn {
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 10px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  margin-top: 1px;
+  z-index: 2;
+}
+
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+  margin-top: 2px;
+  white-space: nowrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav-dropdown-content hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown-active {
+  display: block;
+}
+
+.nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+  color: black;
+  padding: 6px 24px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.nav-dropdown-content .nav-dropdown-header {
+  display: block;
+  padding: 5px 24px;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.nav-dropdown:hover .nav-dropbtn {
+  color: white;
+}
+
+.nav-dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-right .nav-dropdown-content {
+  margin-left: -45%;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+  .distill-site-header a.nav-toggle {
+    float: right;
+    display: block;
+  }
+  .distill-site-header .title {
+    margin-left: 0;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 0;
+  }
+  .distill-site-header {
+    overflow: hidden;
+  }
+  .nav-right .nav-dropdown-content {
+    margin-left: 0;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-header.responsive {position: relative;}
+  .distill-site-header.responsive a.nav-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .distill-site-header.responsive a,
+  .distill-site-header.responsive .nav-dropdown {
+    display: block;
+    text-align: left;
+  }
+  .distill-site-header.responsive .nav-left,
+  .distill-site-header.responsive .nav-right {
+    width: 100%;
+  }
+  .distill-site-header.responsive .nav-dropdown {float: none;}
+  .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+  .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Site Footer */
+
+.distill-site-footer {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 3;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* Headroom */
+
+d-title {
+  padding-top: 6rem;
+}
+
+@media print {
+  d-title {
+    padding-top: 4rem;
+  }
+}
+
+.headroom {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.headroom--transition {
+  transition: all .4s ease-in-out;
+}
+
+.headroom--unpinned {
+  top: -100px;
+}
+
+.headroom--pinned {
+  top: 0;
+}
+
+</style>
+
+<link href="../../site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+<link href="../../site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+<script src="../../site_libs/headroom-0.9.4/headroom.min.js"></script>
+<!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+<style type="text/css">
+
+body {
+  background-color: white;
+}
+
+.pandoc-table {
+  width: 100%;
+}
+
+.pandoc-table>caption {
+  margin-bottom: 10px;
+}
+
+.pandoc-table th:not([align]) {
+  text-align: left;
+}
+
+.pagedtable-footer {
+  font-size: 15px;
+}
+
+.html-widget {
+  margin-bottom: 2.0em;
+}
+
+.l-screen-inset {
+  padding-right: 16px;
+}
+
+.l-screen .caption {
+  margin-left: 10px;
+}
+
+.shaded {
+  background: rgb(247, 247, 247);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .html-widget {
+  margin-bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .shaded-content {
+  background: white;
+}
+
+.text-output {
+  margin-top: 0;
+  line-height: 1.5em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+d-article {
+  padding-bottom: 30px;
+}
+
+d-appendix {
+  padding-top: 30px;
+}
+
+d-article>p>img {
+  width: 100%;
+}
+
+d-article iframe {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 2.0em;
+  width: 100%;
+}
+
+figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* CSS for table of contents */
+
+.d-toc {
+  color: rgba(0,0,0,0.8);
+  font-size: 0.8em;
+  line-height: 1em;
+}
+
+.d-toc-header {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 1.3em;
+}
+
+.d-toc a {
+  border-bottom: none;
+}
+
+.d-toc ul {
+  padding-left: 0;
+}
+
+.d-toc li>ul {
+  padding-top: 0.8em;
+  padding-left: 16px;
+  margin-bottom: 0.6em;
+}
+
+.d-toc ul,
+.d-toc li {
+  list-style-type: none;
+}
+
+.d-toc li {
+  margin-bottom: 0.9em;
+}
+
+.d-toc-separator {
+  margin-top: 20px;
+  margin-bottom: 2em;
+}
+
+.d-article-with-toc {
+  border-top: none;
+  padding-top: 0;
+}
+
+
+
+/* Tweak code blocks (note that this CSS is repeated above in an injection
+   into the d-code shadow dom) */
+
+d-code {
+  overflow-x: auto !important;
+}
+
+pre.d-code code.d-code {
+  padding-left: 10px;
+  font-size: 12px;
+  border-left: 2px solid rgba(0,0,0,0.1);
+}
+
+pre.text-output {
+
+  font-size: 12px;
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+@media(min-width: 768px) {
+
+d-code {
+  overflow-x: visible !important;
+}
+
+pre.d-code code.d-code  {
+    padding-left: 18px;
+    font-size: 14px;
+}
+pre.text-output {
+  font-size: 14px;
+}
+}
+
+/* Figure */
+
+.figure {
+  position: relative;
+  margin-bottom: 2.5em;
+  margin-top: 1.5em;
+}
+
+.figure img {
+  width: 100%;
+}
+
+.figure .caption {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.figure .caption a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.figure .caption b,
+.figure .caption strong, {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 1.0);
+}
+
+
+
+/* Tweak 1000px media break to show more text */
+
+@media(min-width: 1000px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 16px;
+  }
+
+  .grid {
+    grid-column-gap: 16px;
+  }
+
+  d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+  }
+  figure .caption, .figure .caption, figure figcaption {
+    font-size: 13px;
+  }
+}
+
+@media(min-width: 1180px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 32px;
+  }
+
+  .grid {
+    grid-column-gap: 32px;
+  }
+}
+
+
+/* Get the citation styles for the appendix (not auto-injected on render since
+   we do our own rendering of the citation appendix) */
+
+d-appendix .citation-appendix,
+.d-appendix .citation-appendix {
+  font-size: 11px;
+  line-height: 15px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 18px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.02);
+  padding: 10px 18px;
+  border-radius: 3px;
+  color: rgba(150, 150, 150, 1);
+  overflow: hidden;
+  margin-top: -12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+
+/* Social footer */
+
+.social_footer {
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.67);
+}
+
+.disqus-comments {
+  margin-right: 30px;
+}
+
+.disqus-comment-count {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+#disqus_thread {
+  margin-top: 30px;
+}
+
+.article-sharing a {
+  border-bottom: none;
+  margin-right: 8px;
+}
+
+.article-sharing a:hover {
+  border-bottom: none;
+}
+
+.sidebar-section.subscribe {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.subscribe p {
+  margin-bottom: 0.5em;
+}
+
+
+.article-footer .subscribe {
+  font-size: 15px;
+  margin-top: 45px;
+}
+
+
+/* Improve display for browsers without grid (IE/Edge <= 15) */
+
+.downlevel {
+  line-height: 1.6em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+}
+
+.downlevel .d-title {
+  padding-top: 6rem;
+  padding-bottom: 1.5rem;
+}
+
+.downlevel .d-title h1 {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin: 0 0 0.5rem;
+}
+
+.downlevel .d-title p {
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.55em;
+  margin-top: 0;
+}
+
+.downlevel .d-byline {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  font-size: 0.8rem;
+  line-height: 1.8em;
+}
+
+.downlevel .section-separator {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.downlevel .d-article {
+  font-size: 1.06rem;
+  line-height: 1.7em;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+
+.downlevel .d-appendix {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.5);
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.downlevel .footnotes ol {
+  padding-left: 13px;
+}
+
+.downlevel .base-grid,
+.downlevel .distill-header,
+.downlevel .d-title,
+.downlevel .d-abstract,
+.downlevel .d-article,
+.downlevel .d-appendix,
+.downlevel .distill-appendix,
+.downlevel .d-byline,
+.downlevel .d-footnote-list,
+.downlevel .d-citation-list,
+.downlevel .distill-footer,
+.downlevel .appendix-bottom,
+.downlevel .posts-container {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media(min-width: 768px) {
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+  padding-left: 150px;
+  padding-right: 150px;
+  max-width: 900px;
+}
+}
+
+.downlevel pre code {
+  display: block;
+  border-left: 2px solid rgba(0, 0, 0, .1);
+  padding: 0 0 0 20px;
+  font-size: 14px;
+}
+
+.downlevel code, .downlevel pre {
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+</style>
+
+<script type="application/javascript">
+
+function is_downlevel_browser() {
+  if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                 window.navigator.userAgent)) {
+    return true;
+  } else {
+    return window.load_distill_framework === undefined;
+  }
+}
+
+// show body when load is complete
+function on_load_complete() {
+
+  // set body to visible
+  document.body.style.visibility = 'visible';
+
+  // force redraw for leaflet widgets
+  if (window.HTMLWidgets) {
+    var maps = window.HTMLWidgets.findAll(".leaflet");
+    $.each(maps, function(i, el) {
+      var map = this.getMap();
+      map.invalidateSize();
+      map.eachLayer(function(layer) {
+        if (layer instanceof L.TileLayer)
+          layer.redraw();
+      });
+    });
+  }
+
+  // trigger 'shown' so htmlwidgets resize
+  $('d-article').trigger('shown');
+}
+
+function init_distill() {
+
+  init_common();
+
+  // create front matter
+  var front_matter = $('<d-front-matter></d-front-matter>');
+  $('#distill-front-matter').wrap(front_matter);
+
+  // create d-title
+  $('.d-title').changeElementType('d-title');
+
+  // create d-byline
+  var byline = $('<d-byline></d-byline>');
+  $('.d-byline').replaceWith(byline);
+
+  // create d-article
+  var article = $('<d-article></d-article>');
+  $('.d-article').wrap(article).children().unwrap();
+
+  // move posts container into article
+  $('.posts-container').appendTo($('d-article'));
+
+  // create d-appendix
+  $('.d-appendix').changeElementType('d-appendix');
+
+  // create d-bibliography
+  var bibliography = $('<d-bibliography></d-bibliography>');
+  $('#distill-bibliography').wrap(bibliography);
+
+  // flag indicating that we have appendix items
+  var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+  // replace citations with <d-cite>
+  $('.citation').each(function(i, val) {
+    appendix = true;
+    var cites = $(this).attr('data-cites').split(" ");
+    var dt_cite = $('<d-cite></d-cite>');
+    dt_cite.attr('key', cites.join());
+    $(this).replaceWith(dt_cite);
+  });
+  // remove refs
+  $('#refs').remove();
+
+  // replace footnotes with <d-footnote>
+  $('.footnote-ref').each(function(i, val) {
+    appendix = true;
+    var href = $(this).attr('href');
+    var id = href.replace('#', '');
+    var fn = $('#' + id);
+    var fn_p = $('#' + id + '>p');
+    fn_p.find('.footnote-back').remove();
+    var text = fn_p.html();
+    var dtfn = $('<d-footnote></d-footnote>');
+    dtfn.html(text);
+    $(this).replaceWith(dtfn);
+  });
+  // remove footnotes
+  $('.footnotes').remove();
+
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    var id = $(this).attr('id');
+    $('.d-toc a[href="#' + id + '"]').parent().remove();
+    appendix = true;
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+  });
+
+  // show d-appendix if we have appendix content
+  $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+  // replace code blocks with d-code
+  $('pre>code').each(function(i, val) {
+    var code = $(this);
+    var pre = code.parent();
+    var clz = "";
+    var language = pre.attr('class');
+    if (language) {
+      // map unknown languages to "clike" (without this they just dissapear)
+      if ($.inArray(language, ["bash", "clike", "css", "go", "html",
+                               "javascript", "js", "julia", "lua", "markdown",
+                               "markup", "mathml", "python", "svg", "xml"]) == -1)
+        language = "clike";
+      language = ' language="' + language + '"';
+      var dt_code = $('<d-code block' + language + clz + '></d-code>');
+      dt_code.text(code.text());
+      pre.replaceWith(dt_code);
+    } else {
+      code.addClass('text-output').unwrap().changeElementType('pre');
+    }
+  });
+
+  // localize layout chunks to just output
+  $('.layout-chunk').each(function(i, val) {
+
+    // capture layout
+    var layout = $(this).attr('data-layout');
+
+    // apply layout to markdown level block elements
+    var elements = $(this).children().not('d-code, pre.text-output, script');
+    elements.each(function(i, el) {
+      var layout_div = $('<div class="' + layout + '"></div>');
+      if (layout_div.hasClass('shaded')) {
+        var shaded_content = $('<div class="shaded-content"></div>');
+        $(this).wrap(shaded_content);
+        $(this).parent().wrap(layout_div);
+      } else {
+        $(this).wrap(layout_div);
+      }
+    });
+
+
+    // unwrap the layout-chunk div
+    $(this).children().unwrap();
+  });
+
+  // load distill framework
+  load_distill_framework();
+
+  // wait for window.distillRunlevel == 4 to do post processing
+  function distill_post_process() {
+
+    if (!window.distillRunlevel || window.distillRunlevel < 4)
+      return;
+
+    // hide author/affiliations entirely if we have no authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+    if (!have_authors)
+      $('d-byline').addClass('hidden');
+
+    // table of contents
+    if (have_authors) // adjust border if we are in authors
+      $('.d-toc').parent().addClass('d-article-with-toc');
+
+    // strip links that point to #
+    $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+    // hide elements of author/affiliations grid that have no value
+    function hide_byline_column(caption) {
+      $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+    }
+
+    // affiliations
+    var have_affiliations = false;
+    for (var i = 0; i<front_matter.authors.length; ++i) {
+      var author = front_matter.authors[i];
+      if (author.affiliation !== "&nbsp;") {
+        have_affiliations = true;
+        break;
+      }
+    }
+    if (!have_affiliations)
+      $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+    // published date
+    if (!front_matter.publishedDate)
+      hide_byline_column("Published");
+
+    // document object identifier
+    var doi = $('d-byline').find('h3:contains("DOI")');
+    var doi_p = doi.next().empty();
+    if (!front_matter.doi) {
+      // if we have a citation and valid citationText then link to that
+      if ($('#citation').length > 0 && front_matter.citationText) {
+        doi.html('Citation');
+        $('<a href="#citation"></a>')
+          .text(front_matter.citationText)
+          .appendTo(doi_p);
+      } else {
+        hide_byline_column("DOI");
+      }
+    } else {
+      $('<a></a>')
+         .attr('href', "https://doi.org/" + front_matter.doi)
+         .html(front_matter.doi)
+         .appendTo(doi_p);
+    }
+
+     // change plural form of authors/affiliations
+    if (front_matter.authors.length === 1) {
+      var grid = $('.authors-affiliations');
+      grid.children('h3:contains("Authors")').text('Author');
+      grid.children('h3:contains("Affiliations")').text('Affiliation');
+    }
+
+    // inject pre code styles (can't do this with a global stylesheet b/c a shadow root is used)
+    $('d-code').each(function(i, val) {
+      var style = document.createElement('style');
+      style.innerHTML = 'pre code { padding-left: 10px; font-size: 12px; border-left: 2px solid rgba(0,0,0,0.1); } ' +
+                        '@media(min-width: 768px) { pre code { padding-left: 18px; font-size: 14px; } }';
+      if (this.shadowRoot)
+        this.shadowRoot.appendChild(style);
+    });
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // clear polling timer
+    clearInterval(tid);
+
+    // show body now that everything is ready
+    on_load_complete();
+  }
+
+  var tid = setInterval(distill_post_process, 50);
+  distill_post_process();
+
+}
+
+function init_downlevel() {
+
+  init_common();
+
+   // insert hr after d-title
+  $('.d-title').after($('<hr class="section-separator"/>'));
+
+  // check if we have authors
+  var front_matter = JSON.parse($("#distill-front-matter").html());
+  var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+  // manage byline/border
+  if (!have_authors)
+    $('.d-byline').remove();
+  $('.d-byline').after($('<hr class="section-separator"/>'));
+  $('.d-byline a').remove();
+
+  // remove toc
+  $('.d-toc-header').remove();
+  $('.d-toc').remove();
+  $('.d-toc-separator').remove();
+
+  // move appendix elements
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+  });
+
+
+  // inject headers into references and footnotes
+  var refs_header = $('<h3></h3>');
+  refs_header.text('References');
+  $('#refs').prepend(refs_header);
+
+  var footnotes_header = $('<h3></h3');
+  footnotes_header.text('Footnotes');
+  $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+  // move appendix-bottom entries to the bottom
+  $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+  $('.appendix-bottom').remove();
+
+  // remove appendix if it's empty
+  if ($('.d-appendix').children().length === 0)
+    $('.d-appendix').remove();
+
+  // prepend separator above appendix
+  $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+  // trim code
+  $('pre>code').each(function(i, val) {
+    $(this).html($.trim($(this).html()));
+  });
+
+  // move posts-container right before article
+  $('.posts-container').insertBefore($('.d-article'));
+
+  $('body').addClass('downlevel');
+
+  on_load_complete();
+}
+
+
+function init_common() {
+
+  // jquery plugin to change element types
+  (function($) {
+    $.fn.changeElementType = function(newType) {
+      var attrs = {};
+
+      $.each(this[0].attributes, function(idx, attr) {
+        attrs[attr.nodeName] = attr.nodeValue;
+      });
+
+      this.replaceWith(function() {
+        return $("<" + newType + "/>", attrs).append($(this).contents());
+      });
+    };
+  })(jQuery);
+
+  // prevent underline for linked images
+  $('a > img').parent().css({'border-bottom' : 'none'});
+
+  // mark non-body figures created by knitr chunks as 100% width
+  $('.layout-chunk').each(function(i, val) {
+    var figures = $(this).find('img, .html-widget');
+    if ($(this).attr('data-layout') !== "l-body") {
+      figures.css('width', '100%');
+    } else {
+      figures.css('max-width', '100%');
+      figures.filter("[width]").each(function(i, val) {
+        var fig = $(this);
+        fig.css('width', fig.attr('width') + 'px');
+      });
+
+    }
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
+  });
+
+  // get rid of index.html references in header
+  if (window.location.protocol !== "file:") {
+    $('.distill-site-header a[href]').each(function(i,val) {
+      $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+    });
+  }
+
+  // add class to pandoc style tables
+  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+  $('.kable-table').children('table').addClass('pandoc-table');
+
+  // add figcaption style to table captions
+  $('caption').parent('table').addClass("figcaption");
+
+  // initialize posts list
+  if (window.init_posts_list)
+    window.init_posts_list();
+
+  // implmement disqus comment link
+  $('.disqus-comment-count').click(function() {
+    window.headroom_prevent_pin = true;
+    $('#disqus_thread').toggleClass('hidden');
+    if (!$('#disqus_thread').hasClass('hidden')) {
+      var offset = $(this).offset();
+      $(window).resize();
+      $('html, body').animate({
+        scrollTop: offset.top - 35
+      });
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (is_downlevel_browser())
+    init_downlevel();
+  else
+    window.addEventListener('WebComponentsReady', init_distill);
+});
+
+</script>
+
+<!--/radix_placeholder_distill-->
+  <script src="../../site_libs/core-js-2.5.3/shim.min.js"></script>
+  <script src="../../site_libs/react-16.12.0/react.min.js"></script>
+  <script src="../../site_libs/react-16.12.0/react-dom.min.js"></script>
+  <script src="../../site_libs/reactwidget-1.0.0/react-tools.js"></script>
+  <script src="../../site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+  <script src="../../site_libs/reactable-binding-0.1.0/reactable.js"></script>
+  <script src="../../site_libs/d3-5.7.0/d3.min.js"></script>
+  <script src="../../site_libs/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+  <link href="../../site_libs/ggiraphjs-0.2.0/styles.css" rel="stylesheet" />
+  <script src="../../site_libs/ggiraphjs-0.2.0/ggiraphjs.min.js"></script>
+  <script src="../../site_libs/girafe-binding-0.7.0/girafe.js"></script>
+  <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+<style type="text/css">
+.distill-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #67001f; 
+  font-size: 15px;
+  font-weight: 300;
+}
+</style>
+<!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Visualize self-other overlap by relationship and valence: Radar plot","description":"Radar plot to visualize the \"area\" of overlap score across relationship and valence","authors":[{"author":"Stephanie Gluck","authorURL":"https://github.com/s-gluck","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2020-03-15T00:00:00.000-07:00","citationText":"Gluck, 2020"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a href="../../index.html" class="title">Stephanie Gluck</a>
+</div>
+<div class="nav-right">
+<a href="../../index.html">Home</a>
+<a href="../../about.html">About</a>
+<a href="https://github.com/s-gluck">
+<i class="fa fa-github"></i>
+</a>
+<a href="https://scholar.google.com/citations?user=0yt9KGIAAAAJ&amp;hl=en">
+<i class="fa fa-user-graduate"></i>
+</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Visualize self-other overlap by relationship and valence: Radar plot</h1>
+<p>Radar plot to visualize the “area” of overlap score across relationship and valence</p>
+</div>
+
+<div class="d-byline">
+  Stephanie Gluck <a href="https://github.com/s-gluck" class="uri">https://github.com/s-gluck</a> 
+  
+<br/>03-15-2020
+</div>
+
+<div class="d-article">
+<h3 class="d-toc-header">Table of Contents</h3>
+<nav class="d-toc" id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#trait-adjective-checklist">Trait Adjective Checklist</a></li>
+</ul></li>
+<li><a href="#data-visualization---radar-plot">Data Visualization - Radar Plot</a><ul>
+<li><a href="#radar-plot-1">Radar Plot 1</a></li>
+<li><a href="#radar-plot-2">Radar Plot 2</a></li>
+<li><a href="#radar-plot-3">Radar Plot 3</a></li>
+<li><a href="#extra-radar-plot---interactive">Extra Radar Plot - interactive</a></li>
+</ul></li>
+</ul>
+</nav>
+<hr class="d-toc-separator"/>
+<h1 id="introduction">Introduction</h1>
+<p>This is the third visualization in a series of visualization related to the construct of <em>self-other overlap</em> - the extent that one sees the other person as part of the self, a sense of shared identity or interconnectedness - across different relationships that varies in closeness (a close person, an acquaintance, or a disliked person). For more background information, please see <a href="posts/2020-03-11-ios-mosaic-plot/index.html">my blog post on the first visualization</a>.</p>
+<p>I created an Alluvial Plot intended for the general commmunity to visualize the same data from this Radar Plot. Check out <a href="add%20post%20link%20here">my Alluvial Plot post</a> to see an alternative visualization of the same data.</p>
+<h2 id="trait-adjective-checklist">Trait Adjective Checklist</h2>
+<p>Participants in my project completed a trait adjective checklist (Myers &amp; Hodges, 2011, Davis et al., 1996) for themselves and three relaionship targets (close, acquaintance and dislike) that consisted of 114 adjectives that varied in valence (positive, neutral, negative). An excerpt of the Trait Adjective Checklist is included below:</p>
+<p>Trait Adjective Checklist sample items (total of 114 adjectives).</p>
+<p>Which of the following adjectives do you consider to be descriptive of yourself / [target]? Select all that applies.</p>
+<ul>
+<li>Adaptable</li>
+<li>Aggressive</li>
+<li>Clever</li>
+<li>Curious</li>
+<li>Quiet</li>
+<li>Reserved</li>
+<li>Outspoken</li>
+<li>Rude</li>
+<li>Tense</li>
+<li>Wholesome</li>
+</ul>
+<h3 id="overlap-score">Overlap Score</h3>
+<p>A trait adjective overlap score is then calculated for the participants with their three targets. A valenced (positive, neutral or negative traits) overlap score is also caculated. The overlap score is the proportion of traits that one attributes to the self that is later ascribed to the target. For example, a person whose overlap score with their best friend is 0.6 or 60% can be taken to mean that when this person evaluated their best friend, they attributed 60% of their own traits to their best friend.</p>
+<h1 id="data-visualization---radar-plot">Data Visualization - Radar Plot</h1>
+<p>I will use the <code>ggiraphExtra</code> package to create a <a href="https://rpubs.com/cardiomoon/231820">Radar Plot</a> to visualize the average “area” of overlap score for the three relationship and further visualize how the overlap score are distributed into positive, neutral or negative traits.</p>
+<p>The intended audience of the plot is the <strong>scientific community</strong> and more specifically I can see this type of visualization working well in talks, presentations and poster sessions. I can also see that if the plot was printed in black and white, it could potentially be difficult to interpret, especially if no legend is present such as my final plot, making the radar plot less effective to include in journal publication.</p>
+<p>The <strong>intended message</strong> is that when participants think of their own traits and the traits of people from different social relationships that varies in closeness (a close person, an acquaintance, or a disliked person), participants are likely to see more of their own traits (a higher overlap score) in a person they are close with than an acquaintance or disliked person. Participants are also more likely to attribute more postivie traits (relative to neutral or negative) to a closer person or an acquaintance compared to a disliked person. Interestingly, while participants do attribute more negative traits to someone they dislike, participants on average attributed 40% of their negative traits to the disliked person, possibly showing some projection of the self towards the dislike target.</p>
+<p>Load packages</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+#General packages 
+library(here)
+library(ggplot2)
+library(tidyverse)
+library(readr)
+library(reactable)
+library(pander)
+library(ggtext)
+
+#Radar Plot 
+library(ggiraphExtra)</code></pre>
+</div>
+<p>Load and display the data</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+d &lt;- read_csv(here::here(&quot;data&quot;, &quot;self_other_overlap_valence.csv&quot;))
+
+reactable(d, height = 400, 
+          striped = TRUE, 
+          compact = TRUE, 
+          outlined = TRUE)</code></pre>
+<div id="htmlwidget-6a31ae38454a47ccd068" class="reactable html-widget" style="width:auto;height:400px;"></div>
+<script type="application/json" data-for="htmlwidget-6a31ae38454a47ccd068">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"sub":[1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,9,9,9,9,9,9,9,9,9,10,10,10,10,10,10,10,10,10,12,12,12,12,12,12,12,12,12,13,13,13,13,13,13,13,13,13,14,14,14,14,14,14,14,14,14,15,15,15,15,15,15,15,15,15,16,16,16,16,16,16,16,16,16,17,17,17,17,17,17,17,17,17,19,19,19,19,19,19,19,19,19,20,20,20,20,20,20,20,20,20,21,21,21,21,21,21,21,21,21,22,22,22,22,22,22,22,22,22,23,23,23,23,23,23,23,23,23,24,24,24,24,24,24,24,24,24,26,26,26,26,26,26,26,26,26,29,29,29,29,29,29,29,29,29,31,31,31,31,31,31,31,31,31,32,32,32,32,32,32,32,32,32,33,33,33,33,33,33,33,33,33,34,34,34,34,34,34,34,34,34,35,35,35,35,35,35,35,35,35,37,37,37,37,37,37,37,37,37,41,41,41,41,41,41,41,41,41,42,42,42,42,42,42,42,42,42,43,43,43,43,43,43,43,43,43,44,44,44,44,44,44,44,44,44,45,45,45,45,45,45,45,45,45,46,46,46,46,46,46,46,46,46,47,47,47,47,47,47,47,47,47,48,48,48,48,48,48,48,48,48,49,49,49,49,49,49,49,49,49,50,50,50,50,50,50,50,50,50,51,51,51,51,51,51,51,51,51,52,52,52,52,52,52,52,52,52,53,53,53,53,53,53,53,53,53,54,54,54,54,54,54,54,54,54,55,55,55,55,55,55,55,55,55,57,57,57,57,57,57,57,57,57,58,58,58,58,58,58,58,58,58,59,59,59,59,59,59,59,59,59,60,60,60,60,60,60,60,60,60,61,61,61,61,61,61,61,61,61,62,62,62,62,62,62,62,62,62,64,64,64,64,64,64,64,64,64,65,65,65,65,65,65,65,65,65,66,66,66,66,66,66,66,66,66,71,71,71,71,71,71,71,71,71,72,72,72,72,72,72,72,72,72,73,73,73,73,73,73,73,73,73,74,74,74,74,74,74,74,74,74,76,76,76,76,76,76,76,76,76,77,77,77,77,77,77,77,77,77,78,78,78,78,78,78,78,78,78,83,83,83,83,83,83,83,83,83,84,84,84,84,84,84,84,84,84,85,85,85,85,85,85,85,85,85,87,87,87,87,87,87,87,87,87,88,88,88,88,88,88,88,88,88,90,90,90,90,90,90,90,90,90,91,91,91,91,91,91,91,91,91,92,92,92,92,92,92,92,92,92,94,94,94,94,94,94,94,94,94,95,95,95,95,95,95,95,95,95,96,96,96,96,96,96,96,96,96,97,97,97,97,97,97,97,97,97,99,99,99,99,99,99,99,99,99,101,101,101,101,101,101,101,101,101,102,102,102,102,102,102,102,102,102,103,103,103,103,103,103,103,103,103,104,104,104,104,104,104,104,104,104,105,105,105,105,105,105,105,105,105,106,106,106,106,106,106,106,106,106,107,107,107,107,107,107,107,107,107,108,108,108,108,108,108,108,108,108,110,110,110,110,110,110,110,110,110,111,111,111,111,111,111,111,111,111,112,112,112,112,112,112,112,112,112,113,113,113,113,113,113,113,113,113,116,116,116,116,116,116,116,116,116,117,117,117,117,117,117,117,117,117,119,119,119,119,119,119,119,119,119,120,120,120,120,120,120,120,120,120,121,121,121,121,121,121,121,121,121,122,122,122,122,122,122,122,122,122,124,124,124,124,124,124,124,124,124,125,125,125,125,125,125,125,125,125,127,127,127,127,127,127,127,127,127,128,128,128,128,128,128,128,128,128,130,130,130,130,130,130,130,130,130,131,131,131,131,131,131,131,131,131,132,132,132,132,132,132,132,132,132,134,134,134,134,134,134,134,134,134,135,135,135,135,135,135,135,135,135,137,137,137,137,137,137,137,137,137,139,139,139,139,139,139,139,139,139,141,141,141,141,141,141,141,141,141,142,142,142,142,142,142,142,142,142,144,144,144,144,144,144,144,144,144,145,145,145,145,145,145,145,145,145,146,146,146,146,146,146,146,146,146,147,147,147,147,147,147,147,147,147,148,148,148,148,148,148,148,148,148,149,149,149,149,149,149,149,149,149,151,151,151,151,151,151,151,151,151,154,154,154,154,154,154,154,154,154,155,155,155,155,155,155,155,155,155,156,156,156,156,156,156,156,156,156,157,157,157,157,157,157,157,157,157,160,160,160,160,160,160,160,160,160,161,161,161,161,161,161,161,161,161,163,163,163,163,163,163,163,163,163,164,164,164,164,164,164,164,164,164,165,165,165,165,165,165,165,165,165,167,167,167,167,167,167,167,167,167,168,168,168,168,168,168,168,168,168,169,169,169,169,169,169,169,169,169,170,170,170,170,170,170,170,170,170,172,172,172,172,172,172,172,172,172,174,174,174,174,174,174,174,174,174,177,177,177,177,177,177,177,177,177,178,178,178,178,178,178,178,178,178,179,179,179,179,179,179,179,179,179,180,180,180,180,180,180,180,180,180,181,181,181,181,181,181,181,181,181,183,183,183,183,183,183,183,183,183,185,185,185,185,185,185,185,185,185,187,187,187,187,187,187,187,187,187,188,188,188,188,188,188,188,188,188,189,189,189,189,189,189,189,189,189,190,190,190,190,190,190,190,190,190,191,191,191,191,191,191,191,191,191,192,192,192,192,192,192,192,192,192,193,193,193,193,193,193,193,193,193,194,194,194,194,194,194,194,194,194,195,195,195,195,195,195,195,195,195,198,198,198,198,198,198,198,198,198,199,199,199,199,199,199,199,199,199,200,200,200,200,200,200,200,200,200,202,202,202,202,202,202,202,202,202,203,203,203,203,203,203,203,203,203,205,205,205,205,205,205,205,205,205,209,209,209,209,209,209,209,209,209,211,211,211,211,211,211,211,211,211,213,213,213,213,213,213,213,213,213,214,214,214,214,214,214,214,214,214,216,216,216,216,216,216,216,216,216,218,218,218,218,218,218,218,218,218,219,219,219,219,219,219,219,219,219],"relationship":["acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap","acq_overlap","acq_overlap","acq_overlap","close_overlap","close_overlap","close_overlap","dislike_overlap","dislike_overlap","dislike_overlap"],"valence":["negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive","negative","neutral","positive"],"o_none":[23,17,12,28,22,9,13,24,19,33,28,10,25,22,5,20,25,12,22,22,10,23,25,14,15,20,12,32,33,18,29,31,27,29,35,31,24,24,12,22,24,11,21,24,12,32,34,22,31,31,25,28,34,33,35,29,8,30,26,21,30,27,17,33,31,26,30,31,18,26,33,26,30,24,17,32,21,13,19,27,22,33,27,19,33,27,15,25,21,19,33,32,24,31,27,12,12,27,28,28,22,7,19,25,12,19,22,15,29,17,22,29,19,15,14,16,25,17,21,14,18,14,11,12,18,15,28,36,31,28,31,18,15,31,36,23,23,7,18,18,5,6,19,13,29,32,27,31,28,28,28,29,30,29,31,21,28,24,6,12,29,27,31,27,21,33,32,19,25,24,24,28,26,16,29,32,9,12,25,15,30,32,25,31,31,22,26,30,24,30,30,25,30,29,18,26,33,25,24,19,7,18,17,6,6,14,16,26,21,14,27,26,9,17,23,16,30,26,15,25,24,15,24,25,15,30,21,10,31,17,8,20,14,9,34,33,17,33,30,16,25,29,20,21,21,8,19,19,19,17,20,19,13,23,7,16,19,7,8,21,10,31,23,14,31,21,4,11,22,14,32,36,34,33,35,29,32,37,38,29,25,12,25,25,12,24,27,15,23,24,17,21,25,15,17,25,21,33,32,12,31,31,10,27,31,15,35,31,16,35,31,12,28,30,22,29,29,23,28,27,15,19,25,23,30,32,18,29,31,24,27,33,25,33,26,23,30,27,24,24,30,32,22,23,19,22,22,15,14,23,23,28,26,17,29,27,15,24,25,17,21,22,9,25,22,9,17,23,14,31,28,10,31,28,13,19,27,25,34,34,14,28,27,15,22,31,21,28,32,24,28,33,26,23,35,29,25,23,24,27,27,12,11,24,26,28,26,9,25,29,8,18,29,18,34,31,33,34,32,16,27,32,34,28,30,25,28,31,19,22,30,33,33,31,8,24,24,10,17,23,17,32,26,9,31,30,6,22,25,11,32,24,20,29,23,13,11,21,27,31,31,33,35,34,27,27,29,33,23,24,5,31,24,4,21,22,14,23,16,12,19,11,11,19,19,22,28,32,17,29,29,12,23,30,19,23,19,25,26,24,11,18,19,21,25,22,11,27,22,7,19,22,24,19,14,18,24,21,16,10,17,16,14,21,22,19,25,13,20,24,24,25,22,11,29,29,4,20,26,19,25,20,13,22,15,10,9,19,20,7,10,12,17,12,8,10,9,12,27,13,9,25,12,4,17,17,8,31,32,20,29,28,19,17,26,27,31,33,29,31,35,28,27,35,31,28,29,19,28,26,15,18,24,26,28,27,15,25,25,16,10,27,20,31,32,29,30,31,9,18,27,24,31,30,12,31,28,6,29,26,13,20,29,16,31,30,10,19,25,17,27,19,11,25,17,13,17,18,16,30,21,12,32,23,4,19,23,14,29,27,16,31,31,11,18,24,25,31,28,13,29,29,13,17,27,19,33,26,17,26,15,10,24,24,20,23,25,28,26,29,21,16,27,28,19,12,4,12,13,9,7,20,26,35,38,31,26,36,33,34,37,31,24,28,22,30,28,18,16,28,24,35,31,16,28,31,23,31,33,28,24,26,18,21,23,12,19,22,21,30,30,26,35,29,24,25,29,31,29,29,23,28,26,18,26,27,31,25,29,6,21,22,6,13,27,10,29,28,22,23,23,18,17,20,24,28,28,7,32,31,7,13,27,15,28,28,17,22,25,19,18,25,20,32,28,25,31,29,23,24,28,36,25,27,25,25,21,17,14,21,29,7,17,12,7,17,6,4,19,18,35,35,31,32,32,24,30,34,32,30,34,33,32,32,22,27,27,33,29,26,12,27,23,11,16,25,16,29,20,9,26,22,4,15,15,15,28,25,23,29,21,18,29,20,22,34,20,5,30,24,10,15,24,18,31,28,28,28,26,19,24,25,28,31,31,22,29,24,10,24,29,26,31,31,19,30,25,13,20,32,24,19,23,25,18,17,16,8,22,26,32,27,13,28,25,11,17,23,19,24,21,13,27,23,11,22,20,13,34,36,20,34,33,23,24,30,29,25,28,7,21,19,4,12,19,19,34,33,18,33,31,12,26,31,19,28,24,9,17,24,8,15,24,10,28,27,22,28,29,17,22,28,29,23,22,5,24,20,4,16,24,6,26,26,14,28,24,14,21,22,21,26,18,12,23,18,6,11,16,12,26,23,14,25,25,14,19,25,16,30,25,15,29,27,13,18,23,15,32,29,26,31,29,21,28,28,29,34,29,15,33,27,18,22,26,19,35,30,12,34,33,9,17,31,18,35,36,24,34,33,20,27,31,29,32,30,18,32,30,13,24,27,23,22,28,25,29,29,16,13,25,25,33,34,17,33,33,16,23,29,17,27,25,26,27,28,25,19,26,33,29,23,15,32,27,10,7,23,13,24,21,12,22,19,11,19,17,7,32,26,22,32,32,19,22,31,24,34,33,20,32,32,21,28,32,24,31,33,14,31,30,9,24,29,22,30,26,11,35,29,5,27,19,16,33,27,5,25,21,12,21,24,16,26,23,3,26,23,12,10,19,19,32,25,13,27,26,15,21,22,20,29,25,20,29,27,12,20,25,25,29,23,20,28,22,14,22,23,16,35,33,27,34,30,29,28,29,35,34,30,7,32,26,7,26,24,15,32,33,16,31,31,15,22,31,28,32,32,30,32,33,25,30,33,29,27,23,26,20,24,25,10,24,33,30,29,13,28,29,15,23,30,18,35,38,30,34,30,18,25,35,29,21,18,32,19,20,22,12,21,33,35,38,32,33,33,30,21,35,40,29,26,20,18,26,26,16,27,30,27,20,6,24,19,9,8,18,18,35,35,31,35,36,26,32,36,32,18,19,11,20,20,8,6,18,20,27,28,23,27,26,18,23,28,28,31,21,8,31,19,7,16,17,7,34,36,31,33,33,31,25,32,35,27,25,26,27,27,21,8,23,37,32,32,31,25,30,34,22,30,33,35,31,22,23,27,18,6,22,26,21,26,24,25,26,12,14,22,28,30,25,18,28,19,13,9,23,29,31,32,26,25,31,24,28,30,32,29,24,12,29,19,11,14,21,16,25,32,31,31,33,25,16,29,32],"o_both":[2,4,7,2,3,14,1,1,1,0,0,7,2,6,23,0,2,1,4,7,12,3,4,16,2,5,6,0,0,2,1,0,3,2,0,0,0,1,7,0,2,12,3,2,1,0,0,5,0,0,6,0,1,1,0,2,8,0,4,3,0,3,9,0,0,2,0,2,4,0,1,1,0,2,6,0,1,10,0,1,3,0,0,4,0,2,10,0,1,3,0,2,6,0,2,8,0,1,0,0,2,17,1,4,14,1,4,7,1,5,2,0,3,10,3,2,4,2,0,3,4,0,10,6,0,1,1,0,2,2,0,4,3,0,2,0,4,24,1,5,15,5,5,6,0,0,1,0,2,5,1,2,0,0,0,2,2,2,12,3,0,1,0,3,2,0,1,6,0,2,0,1,1,7,2,2,20,2,2,4,0,0,3,0,0,6,0,0,1,0,0,1,0,1,4,1,1,1,0,0,14,3,5,13,5,6,3,0,1,7,2,2,12,2,4,3,1,0,4,2,0,6,1,1,3,0,2,3,1,2,13,1,1,1,0,1,8,0,1,13,0,0,0,0,3,11,4,4,6,2,1,2,1,1,6,4,9,29,11,6,0,0,2,7,1,6,17,1,5,3,0,0,0,0,0,0,0,0,0,0,0,9,1,5,6,1,1,1,0,0,3,1,0,5,2,2,0,0,1,11,0,1,21,0,0,0,0,0,7,0,0,14,0,1,0,0,0,5,2,5,13,3,2,2,0,0,5,0,0,5,0,1,1,0,0,6,0,1,1,1,1,1,2,1,7,2,0,9,7,1,5,3,3,11,0,3,12,1,3,0,0,2,12,3,4,7,1,2,0,0,1,9,1,3,11,1,1,0,0,1,12,1,2,12,0,2,0,0,0,4,0,1,5,1,0,0,1,2,6,3,2,8,5,3,2,0,2,17,1,0,16,1,0,0,0,2,1,0,0,3,1,1,1,0,2,4,1,1,5,6,0,0,0,3,17,1,3,18,0,1,0,0,1,6,0,1,23,2,1,4,0,2,4,1,4,8,1,0,2,0,0,0,0,0,5,0,0,0,0,1,14,0,1,19,0,1,7,3,9,10,5,7,8,5,3,2,1,2,8,1,2,11,2,2,2,1,4,4,3,3,7,2,3,1,2,4,10,0,0,9,2,3,2,1,6,1,2,5,11,3,8,10,7,5,6,2,3,13,1,2,3,1,0,10,0,2,16,3,3,7,3,9,11,3,1,12,4,4,2,10,5,4,7,8,14,7,4,7,4,3,8,2,9,22,4,5,2,2,1,7,1,2,7,0,0,0,0,0,2,0,0,3,0,0,1,1,4,5,2,1,9,2,2,4,0,0,9,3,0,12,3,4,1,1,1,4,1,1,9,0,1,3,0,3,12,1,1,15,0,2,5,2,2,8,1,2,14,2,2,8,0,0,8,2,1,9,5,6,0,0,0,7,1,6,17,3,9,3,0,1,4,0,1,11,1,1,0,0,2,16,2,3,9,0,1,1,0,3,11,0,2,6,1,4,5,4,1,2,2,5,5,3,4,0,0,4,11,4,7,7,8,3,1,0,0,2,0,0,0,0,0,3,0,1,1,2,1,7,2,1,0,0,0,6,0,0,3,0,2,4,0,0,13,2,6,15,3,2,4,0,0,0,0,1,2,0,0,0,0,0,2,2,0,4,3,0,5,0,1,19,7,5,21,4,2,1,0,1,4,3,4,7,2,3,3,0,0,16,0,1,19,1,2,9,0,0,5,3,0,6,3,2,4,0,0,1,0,0,4,1,0,0,1,2,0,0,1,6,4,1,0,1,2,9,9,10,18,19,1,0,0,0,2,0,1,2,0,0,0,0,2,2,1,1,2,0,0,0,0,0,13,2,2,17,3,1,0,0,7,17,3,6,18,3,7,3,0,3,6,0,1,8,0,0,6,0,9,22,1,4,22,0,0,0,0,0,3,0,4,7,0,2,0,0,0,8,1,1,7,0,0,2,1,1,10,1,2,6,1,2,2,3,3,4,9,9,7,7,6,1,0,3,6,0,0,15,1,2,2,1,1,3,4,2,13,3,3,1,0,0,6,0,1,8,1,1,1,2,1,9,5,4,13,7,1,7,0,0,4,0,2,17,0,0,0,0,3,11,4,6,15,0,5,5,0,0,1,0,2,9,2,2,0,0,4,16,1,4,30,5,3,0,2,1,5,1,2,11,1,4,0,0,4,13,5,7,24,5,3,1,1,0,8,0,3,10,3,4,3,1,2,11,0,3,13,1,0,4,1,1,4,0,1,4,0,1,3,0,1,11,0,2,9,0,4,1,0,1,10,0,0,16,0,0,0,0,1,5,0,1,5,0,0,1,0,0,5,2,3,9,2,0,0,1,1,1,1,3,12,4,3,3,1,2,7,1,2,10,0,0,1,0,3,5,1,1,5,1,0,2,0,4,10,1,2,18,1,2,7,0,2,6,7,5,16,6,3,11,0,1,3,1,1,4,0,1,0,1,0,4,1,3,7,0,1,2,0,0,12,1,2,13,1,2,2,0,1,13,0,2,20,0,2,6,0,1,12,0,2,14,0,1,7,0,4,18,0,4,14,7,4,1,0,2,5,2,5,13,3,5,5,0,1,4,2,4,9,0,1,2,0,2,6,2,3,5,5,2,1,0,0,4,0,0,2,0,0,1,0,1,14,0,0,20,0,1,3,0,1,7,1,3,10,0,0,2,0,1,0,1,0,3,1,2,0,0,1,0,2,5,2,3,3,0,2,4,10,2,4,9,3,4,5,0,0,3,0,0,5,0,0,3,1,1,2,4,6,5,4,4,0,0,0,0,0,0,0,0,0,0,0,0,5,3,1,1,2,1,3,0,2,13,2,13,13,5,2,2,0,0,0,0,0,3,0,0,0,6,7,16,3,3,14,10,9,1,1,0,1,3,1,10,1,1,1,0,1,13,2,8,18,2,7,8,0,0,0,0,0,2,0,0,0,0,1,4,0,0,4,5,0,0,0,0,1,0,0,0,0,0,0,0,2,9,0,1,3,0,2,0,0,3,3,2,2,8,5,4,0,0,1,8,2,0,9,3,2,1,0,1,3,2,1,2,1,0,0,0,3,14,0,4,11,0,4,0,1,3,1,1,0,3,0,2,0],"o_self":[2,3,10,2,4,3,3,6,16,2,7,21,0,1,5,2,5,27,5,4,5,6,7,1,7,6,11,3,3,4,2,3,3,1,3,6,10,11,20,10,10,15,7,10,26,2,4,3,2,4,2,2,3,7,0,5,5,0,3,10,0,4,4,2,3,11,2,1,9,2,2,12,1,5,9,1,6,5,1,6,12,2,11,18,2,9,12,2,10,19,2,3,6,2,3,4,2,4,12,3,4,4,2,2,7,2,2,14,3,11,13,4,13,5,1,14,11,13,14,20,11,14,13,9,14,22,6,0,3,5,0,1,4,0,3,11,7,3,10,6,12,6,6,21,3,3,7,3,1,3,2,1,8,6,4,12,4,2,2,3,4,13,1,3,14,1,5,10,1,4,16,2,2,15,1,1,2,1,1,18,2,1,11,2,1,8,2,1,13,5,5,13,5,4,10,4,4,13,10,16,7,7,11,8,5,10,18,5,6,16,3,5,11,3,3,20,4,10,19,3,10,17,4,9,20,4,15,27,3,15,17,3,16,29,1,3,11,1,3,6,1,4,19,14,10,3,10,9,8,12,12,12,14,13,24,11,5,1,4,8,30,4,11,16,3,7,6,3,8,20,1,0,0,1,0,0,1,0,0,6,11,17,5,6,20,5,10,25,12,11,17,11,11,15,10,9,20,2,5,14,2,5,4,2,6,25,0,7,12,0,7,5,0,6,19,6,9,13,4,4,5,3,7,16,3,4,11,3,4,11,3,3,15,1,4,2,1,3,7,0,3,7,8,8,8,8,9,6,3,8,10,2,7,13,5,7,12,4,7,24,7,9,15,4,7,20,6,9,27,3,4,5,2,2,3,2,4,14,1,2,8,0,1,8,1,1,20,2,2,5,2,1,4,1,2,9,7,9,6,5,9,4,3,8,10,7,5,6,6,7,7,6,7,23,1,1,3,1,3,1,0,2,3,7,3,3,6,4,2,1,5,7,2,3,6,1,3,5,2,5,23,3,4,23,3,4,6,1,4,25,3,4,8,2,2,4,2,6,10,0,4,7,0,4,2,0,4,7,1,2,8,1,2,3,1,2,15,5,7,5,3,9,7,3,13,13,2,2,13,2,2,10,1,2,19,3,4,5,1,5,2,2,5,8,3,7,7,5,11,8,3,8,15,9,9,14,8,10,4,7,7,5,7,7,10,12,9,3,13,10,13,5,6,11,6,4,5,3,3,14,3,1,7,3,9,6,2,6,16,4,17,23,7,14,13,7,18,20,3,17,24,5,11,10,3,15,30,2,5,2,3,4,2,4,6,9,1,1,6,1,1,5,1,1,7,3,2,10,2,5,6,2,4,11,7,10,11,4,10,8,4,6,19,1,2,6,1,2,1,2,2,7,4,4,11,3,6,8,4,5,18,1,5,13,2,5,7,1,5,13,8,17,15,6,16,14,3,11,23,3,13,19,2,7,9,0,4,23,1,3,11,1,3,4,0,3,15,3,4,6,1,3,13,3,5,21,2,8,7,2,9,12,1,7,13,2,5,6,4,1,3,3,2,8,15,10,2,11,7,6,7,11,12,0,0,4,0,0,6,0,0,3,5,4,11,3,4,5,3,4,12,0,2,3,0,2,6,0,0,5,10,11,6,8,5,4,7,9,15,0,7,10,0,6,8,0,7,10,5,6,7,3,6,5,2,6,4,10,6,12,3,2,10,6,5,30,6,6,8,3,3,5,4,4,9,2,3,8,2,2,5,1,1,15,7,7,9,4,7,8,4,5,10,3,8,4,3,8,1,2,8,5,8,8,9,9,9,3,5,9,9,27,15,12,19,7,3,9,16,21,0,3,7,0,2,7,0,3,9,2,2,3,1,3,3,2,4,5,6,10,12,4,8,8,3,9,25,6,7,6,3,8,5,3,7,20,5,6,8,5,8,6,5,9,8,1,0,1,0,5,1,1,9,23,4,8,8,4,4,4,4,6,11,3,6,4,2,5,5,3,6,10,3,3,7,3,2,11,3,2,15,11,11,7,5,5,4,7,8,10,1,5,14,1,8,5,0,6,18,5,12,22,2,11,12,3,10,24,1,2,3,1,1,1,0,1,8,6,5,7,3,2,3,1,5,9,1,4,18,1,2,5,1,4,22,6,6,18,2,3,14,6,4,24,6,9,10,6,7,2,4,7,11,11,9,19,10,9,5,6,10,35,1,10,14,2,9,8,2,7,19,9,14,15,4,11,4,4,15,27,6,7,16,7,4,14,4,3,21,4,8,12,5,7,10,4,10,19,2,5,4,3,5,4,3,5,5,0,7,8,0,6,10,0,4,18,0,1,13,0,2,7,0,2,23,0,1,7,0,1,7,0,2,11,2,3,11,0,0,7,0,3,16,4,3,15,4,1,4,1,1,13,0,0,16,0,0,13,1,2,22,4,4,3,3,6,3,3,7,6,1,5,15,0,7,7,0,7,18,11,15,19,4,12,9,5,14,14,3,5,14,2,5,13,3,5,17,0,3,8,0,0,5,1,2,10,4,5,4,3,3,3,3,3,14,0,3,9,0,2,2,0,2,16,2,3,8,2,2,6,2,3,13,9,9,2,9,9,6,2,9,19,3,7,14,1,4,6,0,4,14,4,8,7,2,5,2,4,8,9,6,13,15,4,12,16,1,13,20,0,5,2,0,5,4,0,5,5,1,6,11,1,7,5,1,6,22,3,2,6,2,0,3,3,3,11,3,4,11,2,5,8,2,3,11,8,8,6,6,4,4,5,6,6,1,1,12,1,1,13,0,1,17,0,0,7,0,0,5,0,0,7,13,13,3,10,8,0,10,10,5,0,0,1,0,0,1,0,0,1,6,6,4,3,5,8,4,5,6,8,11,4,6,0,4,3,11,15,0,1,8,0,1,5,0,1,8,9,9,4,12,13,6,5,7,19,6,8,11,4,7,2,6,7,11,3,15,19,1,8,14,1,9,24,0,0,6,0,0,4,0,0,6,8,8,0,8,9,0,3,9,4,3,3,1,3,3,2,3,3,2,0,1,1,0,2,7,0,1,10,8,5,5,6,6,0,3,4,8,5,7,3,3,8,2,2,6,10,4,3,6,2,3,7,3,4,9,5,9,11,5,8,14,5,8,25,2,2,8,2,5,6,3,3,9],"o_other":[8,14,12,3,9,15,18,7,5,0,3,3,8,9,8,13,6,1,4,5,14,3,2,10,11,7,12,0,2,17,3,4,8,3,0,4,1,2,2,3,2,3,4,2,2,1,0,11,2,3,8,5,0,0,0,2,20,5,5,7,5,4,11,0,4,2,3,4,10,7,2,2,4,7,9,2,10,13,15,4,4,0,0,0,0,0,4,8,6,0,0,1,5,2,6,17,21,6,1,4,10,13,13,7,8,13,10,5,2,5,4,2,3,11,17,6,1,3,3,4,2,10,7,8,6,3,0,2,5,0,7,18,13,7,0,1,4,7,6,9,9,18,8,1,3,3,6,1,7,5,4,6,3,0,3,6,1,10,21,17,5,0,3,5,4,1,0,6,9,8,1,4,9,3,3,3,10,20,10,4,3,5,2,2,6,5,7,7,3,0,3,2,0,4,9,4,0,2,1,3,13,7,5,14,19,8,4,4,10,4,3,5,9,13,8,2,0,2,3,5,4,3,6,3,3,1,0,1,0,4,3,11,7,2,0,1,5,1,4,6,9,5,2,0,4,19,2,6,8,4,5,8,7,1,4,4,5,4,12,3,1,0,2,4,0,4,14,20,3,4,2,2,7,1,3,12,2,1,3,0,2,3,4,2,3,5,0,0,0,3,4,2,2,6,6,2,0,0,0,4,2,1,6,6,1,1,0,0,6,0,0,10,7,1,0,0,0,0,1,2,8,10,4,0,2,2,7,3,3,1,5,1,0,1,8,10,4,7,9,10,4,1,3,6,7,3,7,11,11,6,3,2,2,0,1,1,2,6,3,0,7,5,5,3,5,5,11,4,0,1,5,17,1,5,14,13,6,2,0,1,7,6,8,6,12,4,0,5,4,8,5,3,6,10,1,3,2,4,5,0,0,17,16,3,3,0,5,9,3,2,10,10,2,0,0,4,4,0,3,21,7,3,3,0,3,9,0,2,15,6,3,1,0,1,10,9,8,8,16,9,1,0,7,3,1,3,6,10,8,1,0,8,9,3,9,16,21,11,2,4,3,1,0,0,7,8,5,1,11,11,14,3,11,15,13,13,5,4,6,14,8,11,15,8,3,4,4,2,3,3,5,8,9,4,1,8,11,7,5,6,21,13,11,11,5,5,13,3,5,17,11,5,0,6,9,8,1,2,10,15,6,10,7,5,3,2,1,12,1,2,1,4,10,9,0,3,16,9,6,1,4,8,10,7,13,13,20,9,3,14,6,2,4,4,6,11,7,2,1,5,0,3,6,5,11,1,1,0,0,12,2,4,13,14,6,5,3,4,4,3,2,5,7,2,2,3,3,7,3,6,11,13,8,0,0,1,6,3,3,5,18,1,1,2,3,2,3,4,22,15,8,7,0,1,6,0,3,12,2,5,5,12,2,4,1,1,10,13,6,3,0,2,7,2,4,5,10,3,2,2,4,3,0,2,11,13,2,1,5,7,10,3,3,15,16,10,1,1,4,6,3,3,6,15,5,0,0,1,6,7,12,13,9,3,3,6,7,5,3,3,12,13,5,5,1,12,24,8,11,19,13,4,2,0,0,4,9,2,2,1,1,4,6,5,7,0,5,11,14,5,5,0,5,16,7,5,9,4,3,4,1,1,4,4,4,10,6,5,1,5,1,5,0,2,7,10,2,0,1,3,9,2,6,14,4,5,1,0,2,4,4,9,4,12,4,0,0,3,7,6,8,11,12,11,5,5,7,10,1,4,10,20,8,2,0,3,10,6,6,8,10,6,7,0,2,11,1,1,13,8,2,0,1,1,7,1,7,15,12,7,3,0,4,8,0,4,14,3,2,2,0,0,1,3,3,8,5,1,0,3,0,3,1,2,14,6,7,3,0,2,4,2,5,5,13,3,0,0,4,9,3,2,14,14,9,3,2,4,4,1,8,9,1,9,5,0,9,13,4,5,8,19,5,0,0,2,2,3,4,11,7,5,2,1,1,7,3,8,19,8,3,3,0,3,5,1,9,11,11,2,0,2,1,5,3,7,14,13,2,4,2,3,8,6,5,10,17,7,2,5,4,3,2,2,5,7,5,3,0,0,12,0,3,9,10,6,3,2,4,18,6,13,21,15,13,6,0,1,1,1,3,7,8,3,0,1,5,3,12,5,4,14,5,2,1,2,8,1,0,13,7,1,1,1,3,1,0,5,2,8,1,0,6,1,8,4,3,8,11,5,1,0,2,1,3,2,7,15,4,1,2,8,3,3,6,3,9,6,1,0,3,3,1,1,5,12,5,3,0,3,7,1,3,12,4,4,4,1,1,7,2,3,4,13,4,3,0,6,6,1,3,9,18,5,0,0,0,5,1,3,9,8,5,0,1,5,7,1,5,12,9,8,2,8,6,0,1,5,9,17,9,0,1,2,1,1,3,2,11,7,1,4,6,7,4,3,8,12,5,0,5,6,1,2,2,6,27,6,3,0,0,4,2,2,5,5,4,9,0,6,2,0,0,5,10,1,0,0,2,9,2,3,8,6,3,5,0,0,11,0,3,16,7,4,3,5,8,8,0,5,14,8,15,3,0,7,16,8,13,9,12,10,5,0,2,18,0,2,9,16,6,2,0,4,9,5,3,7,11,7,2,2,4,10,2,2,18,11,4,5,0,0,0,1,1,6,7,0,4,0,0,8,1,3,6,7,4,0,0,1,9,2,5,9,8,7,1,0,2,12,1,4,13,10,4,0,0,1,0,0,0,5,2,0,1,0,6,9,7,5,10,17,5,2,2,4,6,4,4,4,9,3,1,0,0,1,1,8,13,10,3,2,0,6,4,2,4,14,9,3,3,0,0,8,2,5,10,14,3,0,0,6,12,11,6,6,13,5,2,0,5,18,3,6,15,19,7,6,0,2,2,0,1,7,3,1,1,2,3,10,0,2,13,14,4,1,1,2,6,1,4,11,5,2,1,1,1,1,1,3,2,16,5,2,1,2,4,2,5,4,10,6,0,0,4,11,0,2,16,19,6,0,0,3,8,7,5,5,10,5,6,0,4,9,12,8,13,29,13,5,6,4,9,2,4,21,13,8,5,0,5,12,2,11,17,21,7,1,0,2,6,6,3,8,3,4,0,1,2,4,1,7,5,16,5,0,7,1,1,1,0,7,16,4,0],"self_percent":[0.5,0.571428571428571,0.411764705882353,0.5,0.428571428571429,0.823529411764706,0.25,0.142857142857143,0.0588235294117647,0,0,0.25,1,0.857142857142857,0.821428571428571,0,0.285714285714286,0.0357142857142857,0.444444444444444,0.636363636363636,0.705882352941177,0.333333333333333,0.363636363636364,0.941176470588235,0.222222222222222,0.454545454545455,0.352941176470588,0,0,0.333333333333333,0.333333333333333,0,0.5,0.666666666666667,0,0,0,0.0833333333333333,0.259259259259259,0,0.166666666666667,0.444444444444444,0.3,0.166666666666667,0.037037037037037,0,0,0.625,0,0,0.75,0,0.25,0.125,"NaN",0.285714285714286,0.615384615384615,"NaN",0.571428571428571,0.230769230769231,"NaN",0.428571428571429,0.692307692307692,0,0,0.153846153846154,0,0.666666666666667,0.307692307692308,0,0.333333333333333,0.0769230769230769,0,0.285714285714286,0.4,0,0.142857142857143,0.666666666666667,0,0.142857142857143,0.2,0,0,0.181818181818182,0,0.181818181818182,0.454545454545455,0,0.0909090909090909,0.136363636363636,0,0.4,0.5,0,0.4,0.666666666666667,0,0.2,0,0,0.333333333333333,0.80952380952381,0.333333333333333,0.666666666666667,0.666666666666667,0.333333333333333,0.666666666666667,0.333333333333333,0.25,0.3125,0.133333333333333,0,0.1875,0.666666666666667,0.75,0.125,0.266666666666667,0.133333333333333,0,0.130434782608696,0.266666666666667,0,0.434782608695652,0.4,0,0.0434782608695652,0.142857142857143,"NaN",0.4,0.285714285714286,"NaN",0.8,0.428571428571429,"NaN",0.4,0,0.363636363636364,0.888888888888889,0.0909090909090909,0.454545454545455,0.555555555555556,0.454545454545455,0.454545454545455,0.222222222222222,0,0,0.125,0,0.666666666666667,0.625,0.333333333333333,0.666666666666667,0,0,0,0.142857142857143,0.333333333333333,0.5,0.857142857142857,0.5,0,0.0714285714285714,0,0.5,0.125,0,0.166666666666667,0.375,0,0.333333333333333,0,0.333333333333333,0.333333333333333,0.318181818181818,0.666666666666667,0.666666666666667,0.909090909090909,0.666666666666667,0.666666666666667,0.181818181818182,0,0,0.214285714285714,0,0,0.428571428571429,0,0,0.0714285714285714,0,0,0.0714285714285714,0,0.2,0.285714285714286,0.2,0.2,0.0714285714285714,0,0,0.666666666666667,0.3,0.3125,0.619047619047619,0.5,0.375,0.142857142857143,0,0.142857142857143,0.304347826086957,0.4,0.285714285714286,0.521739130434783,0.4,0.571428571428571,0.130434782608696,0.2,0,0.173913043478261,0.4,0,0.260869565217391,0.2,0.1,0.130434782608696,0,0.117647058823529,0.1,0.25,0.117647058823529,0.433333333333333,0.25,0.0588235294117647,0.0333333333333333,0,0.25,0.421052631578947,0,0.25,0.684210526315789,0,0,0,0,0.230769230769231,0.785714285714286,0.285714285714286,0.307692307692308,0.428571428571429,0.142857142857143,0.0769230769230769,0.142857142857143,0.0666666666666667,0.0714285714285714,0.2,0.266666666666667,0.642857142857143,0.966666666666667,0.733333333333333,0.428571428571429,0,0,0.153846153846154,0.304347826086957,0.25,0.461538461538462,0.739130434782609,0.25,0.384615384615385,0.130434782608696,0,"NaN","NaN",0,"NaN","NaN",0,"NaN","NaN",0,0,0.346153846153846,0.166666666666667,0.454545454545455,0.230769230769231,0.166666666666667,0.0909090909090909,0.0384615384615385,0,0,0.15,0.0833333333333333,0,0.25,0.166666666666667,0.181818181818182,0,0,0.166666666666667,0.44,0,0.166666666666667,0.84,0,0,0,"NaN",0,0.368421052631579,"NaN",0,0.736842105263158,"NaN",0.142857142857143,0,0,0,0.277777777777778,0.333333333333333,0.555555555555556,0.722222222222222,0.5,0.222222222222222,0.111111111111111,0,0,0.3125,0,0,0.3125,0,0.25,0.0625,0,0,0.75,0,0.25,0.125,1,0.25,0.125,0.2,0.111111111111111,0.466666666666667,0.2,0,0.6,0.7,0.111111111111111,0.333333333333333,0.6,0.3,0.458333333333333,0,0.3,0.5,0.2,0.3,0,0,0.181818181818182,0.444444444444444,0.428571428571429,0.363636363636364,0.259259259259259,0.142857142857143,0.181818181818182,0,0,0.2,0.642857142857143,0.333333333333333,0.6,0.785714285714286,0.333333333333333,0.2,0,0,0.333333333333333,0.6,1,0.666666666666667,0.6,0,0.666666666666667,0,0,0,0.444444444444444,0,0.5,0.555555555555556,0.5,0,0,0.125,0.181818181818182,0.5,0.375,0.181818181818182,0.666666666666667,0.625,0.272727272727273,0.166666666666667,0,0.285714285714286,0.739130434782609,0.142857142857143,0,0.695652173913043,0.142857142857143,0,0,0,0.666666666666667,0.25,0,0,0.75,1,0.333333333333333,0.25,0,0.4,0.571428571428571,0.142857142857143,0.2,0.714285714285714,0.857142857142857,0,0,0,0.5,0.739130434782609,0.5,0.5,0.782608695652174,0,0.166666666666667,0,0,0.2,0.206896551724138,0,0.2,0.793103448275862,0.666666666666667,0.2,0.137931034482759,0,0.333333333333333,0.333333333333333,0.333333333333333,0.666666666666667,0.666666666666667,0.333333333333333,0,0.166666666666667,"NaN",0,0,"NaN",0,0.714285714285714,"NaN",0,0,0,0.333333333333333,0.636363636363636,0,0.333333333333333,0.863636363636364,0,0.333333333333333,0.318181818181818,0.375,0.5625,0.666666666666667,0.625,0.4375,0.533333333333333,0.625,0.1875,0.133333333333333,0.333333333333333,0.5,0.380952380952381,0.333333333333333,0.5,0.523809523809524,0.666666666666667,0.5,0.0952380952380952,0.25,0.5,0.444444444444444,0.75,0.375,0.777777777777778,0.5,0.375,0.111111111111111,0.4,0.363636363636364,0.588235294117647,0,0,0.529411764705882,0.4,0.272727272727273,0.117647058823529,0.1,0.4,0.0666666666666667,0.2,0.333333333333333,0.733333333333333,0.3,0.533333333333333,0.666666666666667,0.5,0.416666666666667,0.375,0.142857142857143,0.25,0.8125,0.0714285714285714,0.166666666666667,0.1875,0.166666666666667,0,0.476190476190476,0,0.333333333333333,0.761904761904762,0.5,0.5,0.333333333333333,0.5,0.9,0.611111111111111,0.5,0.1,0.666666666666667,0.666666666666667,0.4,0.111111111111111,0.714285714285714,0.227272727272727,0.148148148148148,0.5,0.363636363636364,0.518518518518518,0.5,0.181818181818182,0.259259259259259,0.571428571428571,0.15,0.25,0.285714285714286,0.45,0.6875,0.571428571428571,0.25,0.0625,0.5,0.166666666666667,0.777777777777778,0.25,0.333333333333333,0.777777777777778,0,0,0,0,0,0.25,0,0,0.375,0,0,0.125,0.25,0.666666666666667,0.333333333333333,0.5,0.166666666666667,0.6,0.5,0.333333333333333,0.266666666666667,0,0,0.45,0.428571428571429,0,0.6,0.428571428571429,0.4,0.05,0.5,0.333333333333333,0.4,0.5,0.333333333333333,0.9,0,0.333333333333333,0.3,0,0.428571428571429,0.521739130434783,0.25,0.142857142857143,0.652173913043478,0,0.285714285714286,0.217391304347826,0.666666666666667,0.285714285714286,0.380952380952381,0.333333333333333,0.285714285714286,0.666666666666667,0.666666666666667,0.285714285714286,0.380952380952381,0,0,0.347826086956522,0.25,0.0588235294117647,0.391304347826087,0.625,0.352941176470588,0,0,0,0.269230769230769,0.333333333333333,0.461538461538462,0.653846153846154,1,0.692307692307692,0.115384615384615,0,0.25,0.266666666666667,0,0.25,0.733333333333333,1,0.25,0,0,0.333333333333333,0.727272727272727,0.666666666666667,0.5,0.409090909090909,0,0.166666666666667,0.0454545454545455,0,0.272727272727273,0.611111111111111,0,0.181818181818182,0.333333333333333,0.5,0.363636363636364,0.277777777777778,0.666666666666667,0.166666666666667,0.25,0.333333333333333,0.833333333333333,0.625,0.5,0.666666666666667,0,0,0.285714285714286,0.846153846153846,0.266666666666667,0.5,0.538461538461538,0.533333333333333,0.214285714285714,0.0769230769230769,"NaN","NaN",0.333333333333333,"NaN","NaN",0,"NaN","NaN",0.5,0,0.2,0.0833333333333333,0.4,0.2,0.583333333333333,0.4,0.2,0,"NaN",0,0.666666666666667,"NaN",0,0.333333333333333,"NaN",1,0.444444444444444,0,0,0.684210526315789,0.2,0.545454545454545,0.789473684210526,0.3,0.181818181818182,0.210526315789474,"NaN",0,0,"NaN",0.142857142857143,0.2,"NaN",0,0,0,0,0.222222222222222,0.4,0,0.444444444444444,0.6,0,0.555555555555556,0,0.142857142857143,0.612903225806452,0.7,0.714285714285714,0.67741935483871,0.4,0.285714285714286,0.032258064516129,0,0.142857142857143,0.333333333333333,0.5,0.571428571428571,0.583333333333333,0.333333333333333,0.428571428571429,0.25,0,0,0.666666666666667,0,0.333333333333333,0.791666666666667,0.5,0.666666666666667,0.375,0,0,0.357142857142857,0.428571428571429,0,0.428571428571429,0.428571428571429,0.285714285714286,0.285714285714286,0,0,0.2,0,0,0.8,0.333333333333333,0,0,0.111111111111111,0.2,0,0,0.1,0.666666666666667,0.444444444444444,0.1,0,0.0357142857142857,0.117647058823529,0.428571428571429,0.321428571428571,0.588235294117647,0.857142857142857,0.678571428571429,0.0588235294117647,0,"NaN",0,0.222222222222222,"NaN",0.333333333333333,0.222222222222222,"NaN",0,0,0,0.5,0.4,0.5,0.25,0.4,0,0,0,0,0,0.52,0.333333333333333,0.2,0.68,0.5,0.1,0,0,0.5,0.739130434782609,0.5,0.428571428571429,0.782608695652174,0.5,0.5,0.130434782608696,0,0.333333333333333,0.428571428571429,0,0.111111111111111,0.571428571428571,0,0,0.428571428571429,0,1,0.956521739130435,1,0.444444444444444,0.956521739130435,0,0,0,0,0,0.272727272727273,0,0.5,0.636363636363636,0,0.25,0,0,0,0.666666666666667,0.333333333333333,0.166666666666667,0.583333333333333,0,0,0.166666666666667,0.25,0.25,0.588235294117647,0.25,0.5,0.352941176470588,0.25,0.5,0.117647058823529,0.214285714285714,0.214285714285714,0.363636363636364,0.642857142857143,0.642857142857143,0.636363636363636,0.5,0.428571428571429,0.0909090909090909,0,0.375,0.3,0,0,0.75,1,0.25,0.1,0.166666666666667,0.0769230769230769,0.12,0.666666666666667,0.153846153846154,0.52,0.5,0.230769230769231,0.04,0,0,0.666666666666667,0,0.5,0.888888888888889,1,0.5,0.111111111111111,0.25,0.166666666666667,0.5625,0.625,0.666666666666667,0.8125,0.875,0.166666666666667,0.4375,0,0,0.181818181818182,0,0.5,0.772727272727273,0,0,0,0,0.333333333333333,0.379310344827586,0.666666666666667,0.666666666666667,0.517241379310345,0,0.555555555555556,0.172413793103448,0,0,0.0909090909090909,0,0.222222222222222,0.818181818181818,0.333333333333333,0.222222222222222,0,0,0.307692307692308,0.457142857142857,0.0909090909090909,0.307692307692308,0.857142857142857,0.454545454545455,0.230769230769231,0,0.666666666666667,0.0909090909090909,0.263157894736842,0.333333333333333,0.181818181818182,0.578947368421053,0.333333333333333,0.363636363636364,0,0,0.222222222222222,0.464285714285714,0.555555555555556,0.388888888888889,0.857142857142857,0.555555555555556,0.166666666666667,0.0357142857142857,0.142857142857143,0,0.333333333333333,0,0.428571428571429,0.416666666666667,0.428571428571429,0.571428571428571,0.125,0.2,0.2,0.478260869565217,0,0.3,0.565217391304348,0.2,0,0.173913043478261,0.333333333333333,0.166666666666667,0.5,0,0.166666666666667,0.5,0,0.166666666666667,0.375,"NaN",0.125,0.578947368421053,"NaN",0.25,0.473684210526316,"NaN",0.5,0.0526315789473684,"NaN",0.5,0.434782608695652,"NaN",0,0.695652173913043,"NaN",0,0,"NaN",0.5,0.416666666666667,"NaN",0.5,0.416666666666667,"NaN",0,0.0833333333333333,0,0,0.3125,1,1,0.5625,1,0,0,0.2,0.25,0.0625,0.2,0.75,0.75,0.8,0.75,0.1875,1,1,0.304347826086957,1,1,0.434782608695652,0,0,0.0434782608695652,0,0.428571428571429,0.625,0.25,0.142857142857143,0.625,0.25,0,0.25,0,0.444444444444444,0.4,1,0.222222222222222,0.72,1,0.222222222222222,0.28,0,0.117647058823529,0.24,0.636363636363636,0.294117647058824,0.64,0.545454545454545,0.176470588235294,0.44,0,0.166666666666667,0.176470588235294,0.333333333333333,0.166666666666667,0.235294117647059,0,0.166666666666667,0,1,0,0.333333333333333,1,1,0.583333333333333,0,0.333333333333333,0.166666666666667,0,0,0.75,0.25,0.4,0.8125,0.25,0.4,0.125,"NaN",0.25,0.590909090909091,"NaN",0.5,0.909090909090909,"NaN",0.5,0.272727272727273,0,0.25,0.6,0,0.5,0.7,0,0.25,0.35,0,0.307692307692308,0.9,0,0.307692307692308,0.7,0.777777777777778,0.307692307692308,0.05,0,0.222222222222222,0.263157894736842,0.666666666666667,0.555555555555556,0.684210526315789,1,0.555555555555556,0.263157894736842,0,0.111111111111111,0.363636363636364,0.5,0.444444444444444,0.818181818181818,0,0.111111111111111,0.181818181818182,0,0.133333333333333,0.285714285714286,0.333333333333333,0.2,0.238095238095238,0.833333333333333,0.133333333333333,0.0476190476190476,"NaN",0,0.666666666666667,"NaN",0,0.333333333333333,"NaN",0,0.166666666666667,0,0.142857142857143,0.56,0,0,0.8,0,0.142857142857143,0.12,0,0.333333333333333,0.538461538461538,0.333333333333333,1,0.769230769230769,0,0,0.153846153846154,0,0.2,0,0.333333333333333,0,0.272727272727273,0.333333333333333,0.4,0,0,0.111111111111111,0,0.25,0.555555555555556,0.333333333333333,0.375,0.333333333333333,0,0.666666666666667,0.8,0.454545454545455,0.666666666666667,0.8,0.409090909090909,1,0.8,0.227272727272727,"NaN","NaN",0.3,"NaN","NaN",0.5,"NaN","NaN",0.3,0.0714285714285714,0.0714285714285714,0.4,0.285714285714286,0.428571428571429,1,0.285714285714286,0.285714285714286,0,"NaN","NaN",0,"NaN","NaN",0,"NaN","NaN",0,0,0,0.555555555555556,0.5,0.166666666666667,0.111111111111111,0.333333333333333,0.166666666666667,0.333333333333333,0,0.153846153846154,0.764705882352941,0.25,1,0.764705882352941,0.625,0.153846153846154,0.117647058823529,"NaN",0,0,"NaN",0,0.375,"NaN",0,0,0.4,0.4375,0.8,0.2,0.1875,0.7,0.666666666666667,0.5625,0.05,0.142857142857143,0,0.0833333333333333,0.428571428571429,0.125,0.833333333333333,0.142857142857143,0.125,0.0833333333333333,0,0.0625,0.40625,0.666666666666667,0.5,0.5625,0.666666666666667,0.4375,0.25,"NaN","NaN",0,"NaN","NaN",0.333333333333333,"NaN","NaN",0,0,0.111111111111111,1,0,0,1,0.625,0,0,0,0,0.5,0,0,0,0,0,0,"NaN",0.666666666666667,0.9,"NaN",0.333333333333333,0.3,"NaN",0.666666666666667,0,0,0.375,0.375,0.25,0.25,1,0.625,0.5,0,0,0.125,0.727272727272727,0.4,0,0.818181818181818,0.6,0.25,0.0909090909090909,0,0.25,0.333333333333333,0.5,0.25,0.222222222222222,0.25,0,0,0,0.25,0.56,0,0.333333333333333,0.44,0,0.333333333333333,0,0.333333333333333,0.6,0.111111111111111,0.333333333333333,0,0.333333333333333,0,0.4,0],"other_percent":[0.2,0.222222222222222,0.368421052631579,0.4,0.25,0.482758620689655,0.0526315789473684,0.125,0.166666666666667,"NaN",0,0.7,0.2,0.4,0.741935483870968,0,0.25,0.5,0.5,0.583333333333333,0.461538461538462,0.5,0.666666666666667,0.615384615384615,0.153846153846154,0.416666666666667,0.333333333333333,"NaN",0,0.105263157894737,0.25,0,0.272727272727273,0.4,"NaN",0,0,0.333333333333333,0.777777777777778,0,0.5,0.8,0.428571428571429,0.5,0.333333333333333,0,"NaN",0.3125,0,0,0.428571428571429,0,1,1,"NaN",0.5,0.285714285714286,0,0.444444444444444,0.3,0,0.428571428571429,0.45,"NaN",0,0.5,0,0.333333333333333,0.285714285714286,0,0.333333333333333,0.333333333333333,0,0.222222222222222,0.4,0,0.0909090909090909,0.434782608695652,0,0.2,0.428571428571429,"NaN","NaN",1,"NaN",1,0.714285714285714,0,0.142857142857143,1,"NaN",0.666666666666667,0.545454545454545,0,0.25,0.32,0,0.142857142857143,0,0,0.166666666666667,0.566666666666667,0.0714285714285714,0.363636363636364,0.636363636363636,0.0714285714285714,0.285714285714286,0.583333333333333,0.333333333333333,0.5,0.333333333333333,0,0.5,0.476190476190476,0.15,0.25,0.8,0.4,0,0.428571428571429,0.666666666666667,0,0.588235294117647,0.428571428571429,0,0.25,1,0,0.285714285714286,1,0,0.181818181818182,0.1875,0,1,0,0.5,0.774193548387097,0.142857142857143,0.357142857142857,0.625,0.217391304347826,0.384615384615385,0.857142857142857,0,0,0.142857142857143,0,0.222222222222222,0.5,0.2,0.25,0,"NaN",0,0.25,0.666666666666667,0.166666666666667,0.363636363636364,0.15,0,1,0,0.375,0.333333333333333,0,1,0.5,0,0.2,0,0.2,0.1,0.7,0.4,0.4,0.666666666666667,0.0909090909090909,0.166666666666667,0.5,0,0,0.6,0,0,0.545454545454545,0,0,0.25,"NaN",0,0.333333333333333,"NaN",0.2,0.307692307692308,0.2,1,0.333333333333333,0,0,0.518518518518518,0.3,0.5,0.481481481481481,0.208333333333333,0.428571428571429,0.428571428571429,0,0.0909090909090909,0.636363636363636,0.4,0.285714285714286,0.571428571428571,0.133333333333333,0.333333333333333,0.6,1,0,0.571428571428571,0.285714285714286,0,0.666666666666667,0.142857142857143,0.25,0.5,0,1,0.75,1,0.333333333333333,0.8125,0.0833333333333333,0.125,0.333333333333333,"NaN",0.5,0.615384615384615,0,0.2,0.684210526315789,0,0,0,"NaN",0.428571428571429,0.366666666666667,0.666666666666667,0.4,0.428571428571429,0.333333333333333,0.166666666666667,0.2,0.125,0.5,0.6,0.5,0.642857142857143,0.878787878787879,0.478260869565217,0.666666666666667,0,"NaN",0.5,0.636363636363636,1,0.6,0.548387096774194,0.0476190476190476,0.625,0.428571428571429,0,0,0,0,0,0,0,0,0,"NaN",0,0.75,0.2,0.714285714285714,0.666666666666667,0.166666666666667,1,1,"NaN",0,0.428571428571429,0.333333333333333,0,0.454545454545455,0.25,0.5,"NaN","NaN",1,0.733333333333333,0,0.5,0.777777777777778,0,0,0,"NaN","NaN",0.538461538461538,"NaN","NaN",0.583333333333333,0,0.5,"NaN","NaN","NaN",1,0.666666666666667,0.714285714285714,0.619047619047619,0.230769230769231,0.333333333333333,1,0,0,0.416666666666667,0,0,0.833333333333333,0,0.5,1,0,0,0.375,0,0.125,0.1,0.0909090909090909,0.2,0.5,0.4,0.142857142857143,0.5,0.4,0,0.45,0.388888888888889,0.142857142857143,0.625,0.6,0.6,1,0,0.75,0.857142857142857,0.142857142857143,0.5,"NaN",0,0.285714285714286,0.705882352941177,0.5,0.444444444444444,0.583333333333333,0.0833333333333333,0.333333333333333,"NaN",0,0.166666666666667,0.346153846153846,0.5,0.375,0.44,0.0714285714285714,0.142857142857143,0,"NaN",0.5,0.631578947368421,0.142857142857143,0.2,0.666666666666667,0,0.333333333333333,"NaN",0,0,0.333333333333333,0,0.25,0.454545454545455,0.0909090909090909,0,0,0.333333333333333,0.333333333333333,0.545454545454545,1,1,0.32,0.238095238095238,0.5,0.4,"NaN",0.285714285714286,0.653846153846154,0.25,0,0.615384615384615,0.0909090909090909,0,"NaN","NaN",0.333333333333333,0.2,"NaN",0,0.125,0.125,0.25,0.25,"NaN",0.4,0.307692307692308,1,0.333333333333333,0.25,0.5,0,0,"NaN",0.75,0.62962962962963,0.1,0.272727272727273,0.692307692307692,0,0.1,0,"NaN",0.125,0.666666666666667,0,0.25,0.793103448275862,0.166666666666667,0.111111111111111,0.8,"NaN",0.2,0.307692307692308,0.25,0.307692307692308,0.333333333333333,0.0454545454545455,0,0.5,0,0,0,"NaN","NaN",0.416666666666667,0,0,0,0,0.0833333333333333,0.5,0,0.0833333333333333,0.558823529411765,0,0.0714285714285714,0.583333333333333,0.428571428571429,0.6,0.416666666666667,0.384615384615385,0.388888888888889,0.347826086956522,0.384615384615385,0.5,0.333333333333333,0.2,0.5,0.727272727272727,0.25,0.285714285714286,0.578947368421053,0.181818181818182,0.333333333333333,0.666666666666667,0.111111111111111,0.266666666666667,0.363636363636364,0.375,0.333333333333333,0.25,0.133333333333333,0.214285714285714,0.0833333333333333,0.285714285714286,0.444444444444444,0.434782608695652,0,0,0.346153846153846,0.153846153846154,0.375,1,0.142857142857143,0.4,0.111111111111111,0.666666666666667,0.714285714285714,0.523809523809524,0.166666666666667,0.571428571428571,0.5,0.5,0.5,0.666666666666667,0.5,0.75,0.52,0.5,0.5,0.75,0.2,0,0.526315789473684,"NaN",0.4,0.5,0.25,0.333333333333333,0.875,0.428571428571429,0.529411764705882,0.523809523809524,0.3,0.0714285714285714,0.48,0.166666666666667,0.307692307692308,0.4,0.416666666666667,0.454545454545455,0.666666666666667,0.636363636363636,0.666666666666667,0.7,0.388888888888889,0.363636363636364,0.777777777777778,0.8,0.375,1,0.4,0.6,0.814814814814815,0.266666666666667,0.833333333333333,0.666666666666667,1,1,0.368421052631579,0.333333333333333,0.333333333333333,0.35,0,0,0,0,0,0.333333333333333,0,0,0.375,0,0,0.333333333333333,0.25,0.571428571428571,0.416666666666667,0.4,0.142857142857143,0.45,0.133333333333333,0.2,1,"NaN",0,0.6,0.5,0,0.705882352941177,0.142857142857143,0.8,0.5,0.333333333333333,0.25,0.666666666666667,0.25,0.2,0.290322580645161,0,0.111111111111111,0.3,"NaN",0.75,0.666666666666667,1,0.25,0.555555555555556,0,0.285714285714286,0.5,0.142857142857143,0.5,0.666666666666667,0.5,0.666666666666667,0.583333333333333,0.133333333333333,0.25,0.727272727272727,"NaN",0,0.533333333333333,0.5,0.2,0.642857142857143,0.333333333333333,0.666666666666667,0,0,0,0.7,1,0.75,0.607142857142857,0.1875,0.818181818181818,0.75,0,0.125,0.285714285714286,0,0.25,0.423076923076923,0.0588235294117647,0.0909090909090909,0,0,0.333333333333333,0.727272727272727,0.4,0.5,0.6,0,0.166666666666667,1,"NaN",0.75,0.647058823529412,0,0.142857142857143,0.315789473684211,0.1,0.571428571428571,0.625,0.4,0.125,0.285714285714286,0.4,0.625,0.294117647058824,0.1875,0.444444444444444,0,0,0.25,0.314285714285714,0.333333333333333,0.388888888888889,0.269230769230769,0.380952380952381,0.428571428571429,0.333333333333333,"NaN","NaN",0.333333333333333,0,0,0,0,0,0.428571428571429,0,0.166666666666667,0.125,1,0.166666666666667,0.388888888888889,0.125,0.166666666666667,0,"NaN",0,0.272727272727273,0,0,0.25,0,0.4,0.5,0,0,0.764705882352941,0.333333333333333,0.6,0.6,0.333333333333333,0.285714285714286,0.8,0,0,0,"NaN",0.333333333333333,0.222222222222222,0,0,"NaN",0,0,0.181818181818182,0.5,0,0.222222222222222,0.428571428571429,0,0.833333333333333,"NaN",0.333333333333333,0.826086956521739,0.636363636363636,0.357142857142857,0.84,0.25,0.333333333333333,1,"NaN",0.25,0.363636363636364,0.333333333333333,0.333333333333333,0.388888888888889,0.142857142857143,0.214285714285714,0.375,0,0,0.615384615384615,0,0.2,0.655172413793103,0.0476190476190476,0.2,0.818181818181818,"NaN",0,0.333333333333333,0.333333333333333,0,0.428571428571429,0.230769230769231,0.25,0.363636363636364,"NaN",0,0.0833333333333333,0,0,0.235294117647059,0.111111111111111,0,"NaN",0.5,0.666666666666667,0,0,0.125,0.285714285714286,0.25,0.125,0,1,0.333333333333333,0.529411764705882,1,0.714285714285714,0.5625,0.863636363636364,0.333333333333333,0,"NaN","NaN",0.666666666666667,0,0.25,0.2,0,0,"NaN",0,1,0.4,0.5,0.333333333333333,0.125,0,0,0,"NaN",0,0.764705882352941,0.5,0.285714285714286,0.772727272727273,0.1875,0.25,"NaN","NaN",0.636363636363636,0.653846153846154,0.5,0.75,0.5625,0.176470588235294,0.4375,0.5,0,0.428571428571429,0.6,0,0.111111111111111,0.470588235294118,0,0,0.545454545454545,"NaN",0.5,0.628571428571429,0.2,0.444444444444444,0.733333333333333,0,0,"NaN","NaN",0,0.6,0,0.5,0.388888888888889,0,0.285714285714286,0,0,0,0.533333333333333,0.25,0.111111111111111,0.269230769230769,0,0,0.4,1,0.25,0.666666666666667,0.5,0.181818181818182,0.352941176470588,0.0833333333333333,0.5,1,0.6,0.75,0.444444444444444,0.75,0.5625,0.333333333333333,0.35,0.75,0.2,0,0.5,0.428571428571429,0,0,0.6,0.0555555555555556,0.222222222222222,0.5,0.166666666666667,0.2,0.5,0.666666666666667,0.5,0.722222222222222,0.3,0.375,0.25,"NaN","NaN",0.333333333333333,"NaN",0.25,0.470588235294118,0.0909090909090909,0.142857142857143,0.25,0.5,0.2,0.333333333333333,0.454545454545455,0.235294117647059,0.382352941176471,0.318181818181818,0.0714285714285714,0.538461538461538,"NaN",0,0.8,0,0.4,0.708333333333333,0,0,"NaN",0,0.375,0.785714285714286,0.25,0.545454545454545,0.789473684210526,0,0.5,0.714285714285714,0,0,0.111111111111111,0,1,0.409090909090909,0.222222222222222,0.666666666666667,0,0,0.571428571428571,0.941176470588235,1,0.444444444444444,0.9375,0.384615384615385,0.75,"NaN",0.25,0.5,0.384615384615385,0.2,0.4,0.578947368421053,0.0833333333333333,0.444444444444444,0,"NaN",0.666666666666667,0.928571428571429,0.625,0.777777777777778,0.774193548387097,0.25,0.428571428571429,0.5,0.333333333333333,0,0.727272727272727,0,0.333333333333333,0.769230769230769,0.25,0.4,0.75,1,0.4,0.785714285714286,0,0.75,0.722222222222222,0.0769230769230769,0,0.571428571428571,1,0.25,0.363636363636364,0,0.25,0.25,0,0.2,0.428571428571429,0,0.5,0.611111111111111,0,0.4,0.692307692307692,0,0.5,0.25,"NaN",0.142857142857143,0.625,0,0,0.64,0,0,"NaN","NaN",1,0.5,0,0.25,0.357142857142857,0,0,1,0,0,0.416666666666667,0.666666666666667,0.375,0.428571428571429,0.181818181818182,0,0,0.111111111111111,0.142857142857143,1,0.5,0.375,0.571428571428571,0.19047619047619,0.25,1,0.5,0.5,0.875,0.5,0.4,0.833333333333333,0,0,0.5,0,0.333333333333333,0.416666666666667,0.2,0.25,0.384615384615385,0.0769230769230769,0,1,0,0.4,0.909090909090909,0.333333333333333,0.5,0.75,0.0357142857142857,0.25,0.7,"NaN",1,0.6,0.777777777777778,0.714285714285714,0.761904761904762,0.545454545454545,0.428571428571429,0.55,"NaN",0.142857142857143,0.6,1,1,0.444444444444444,0,0.5,"NaN",1,0,0.307692307692308,0.333333333333333,0.5,0.466666666666667,0,0.25,0.285714285714286,"NaN","NaN",0.521739130434783,1,0.4,0.448275862068966,0.125,0.333333333333333,0.4,0,0.111111111111111,0.619047619047619,"NaN",0.285714285714286,0.588235294117647,0,0.117647058823529,0.666666666666667,"NaN",0.125,0.428571428571429,0,0.133333333333333,0.608695652173913,0,0.0909090909090909,0.583333333333333,"NaN",0.666666666666667,0.5,"NaN",0.666666666666667,0.608695652173913,0.304347826086957,0.4,0.333333333333333,"NaN",0.333333333333333,0.357142857142857,0.285714285714286,0.625,0.65,0.214285714285714,0.416666666666667,0.714285714285714,0,0.2,0.285714285714286,0.5,0.666666666666667,0.333333333333333,0,0.2,0.285714285714286,"NaN",1,1,0.666666666666667,0.75,0.454545454545455,0.416666666666667,1,0.2,"NaN","NaN",0.333333333333333,0,0,0.25,0,0,1,"NaN",0.5,0.608695652173913,0,0,0.689655172413793,0,0.125,0.75,"NaN",0.333333333333333,0.368421052631579,0.5,0.428571428571429,0.434782608695652,0,0,1,"NaN",0.5,"NaN",1,"NaN",0.375,0.333333333333333,1,0,"NaN",0.142857142857143,0,0.222222222222222,0.5,0.166666666666667,0.15,0.375,0,0.5,0.5,0.625,0.333333333333333,0.5,0.692307692307692,0.25,0.571428571428571,0.833333333333333,"NaN","NaN",0.75,0,0,0.277777777777778,0,0,0.6,1,0.142857142857143,0.333333333333333,0.666666666666667,0.6,0.263157894736842,0.307692307692308,0.571428571428571,0,"NaN","NaN",0,0,0,0,0,0,"NaN","NaN",0,0.294117647058824,0.214285714285714,0.142857142857143,0.142857142857143,0.133333333333333,0.166666666666667,0.6,"NaN",0.285714285714286,0.419354838709677,0.4,0.684210526315789,0.464285714285714,0.208333333333333,0.222222222222222,0.25,"NaN",0,0,"NaN",0,0.3,0,0,0,0.75,0.7,0.615384615384615,1,0.6,0.518518518518518,0.416666666666667,0.692307692307692,0.5,0.5,0,0.142857142857143,0.75,0.2,0.476190476190476,0.166666666666667,0.333333333333333,0.5,0,0.5,0.928571428571429,0.666666666666667,0.727272727272727,0.9,0.111111111111111,0.583333333333333,0.8,0,0,0,0,0,0.333333333333333,0,0,"NaN","NaN",0.2,0.266666666666667,"NaN",0,0.2,0.208333333333333,0,"NaN","NaN",0,0.111111111111111,0,0,0,0,0,0,"NaN",0.333333333333333,0.5,0,0.111111111111111,0.1875,0,0.133333333333333,0,0,0.428571428571429,0.25,0.5,0.333333333333333,0.275862068965517,0.277777777777778,0.333333333333333,0,"NaN",0.166666666666667,0.4,0.5,0,0.346153846153846,0.125,0.222222222222222,0.5,"NaN",0.333333333333333,0.333333333333333,0.25,0.25,0.2,0.25,0,"NaN",0,0.6,0.777777777777778,0,0.363636363636364,0.6875,0,0.444444444444444,"NaN",0.125,0.75,0.5,0.5,"NaN",0.3,0,0.333333333333333,"NaN"]},"columns":[{"accessor":"sub","name":"sub","type":"numeric"},{"accessor":"relationship","name":"relationship","type":"character"},{"accessor":"valence","name":"valence","type":"character"},{"accessor":"o_none","name":"o_none","type":"numeric"},{"accessor":"o_both","name":"o_both","type":"numeric"},{"accessor":"o_self","name":"o_self","type":"numeric"},{"accessor":"o_other","name":"o_other","type":"numeric"},{"accessor":"self_percent","name":"self_percent","type":"numeric"},{"accessor":"other_percent","name":"other_percent","type":"numeric"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"outlined":true,"striped":true,"compact":true,"height":"400px","dataKey":"30a19a39e236cc8d9d5e64eac98bf46f"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+<p>Data wrangling</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+radar_d &lt;- d %&gt;% 
+  group_by(relationship, valence) %&gt;% 
+  summarize(mean = mean(self_percent, na.rm = T)*100) %&gt;% 
+  ungroup() %&gt;%  
+  mutate(valence = str_to_title(valence), 
+         relationship = as.factor(relationship), 
+         valence = as.factor(valence)) %&gt;%  
+  mutate(relationship = fct_relevel(relationship, &quot;close_overlap&quot;,
+                                    &quot;acq_overlap&quot;, 
+                                    &quot;dislike_overlap&quot;),
+         valence = fct_relevel(valence, &quot;Positive&quot;, &quot;Neutral&quot;, &quot;Negative&quot;),
+         relationship = recode(relationship, 
+                               &quot;close_overlap&quot; = &quot;Close Person&quot;, 
+                               &quot;acq_overlap&quot; = &quot;Acquaintance&quot;, 
+                               &quot;dislike_overlap&quot; = &quot;Disliked Person&quot;)) %&gt;% 
+  pivot_wider(names_from = valence, values_from = mean)</code></pre>
+</div>
+<p>This is the data I intend to summarize with my Radar plot. The numeric values denote mean percent overlap score which is calculated as the proportion of traits that one attributes to the self that is later ascribed to the target.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+pander(radar_d)</code></pre>
+<table style="width:69%;">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">relationship</th>
+<th style="text-align: center;">Negative</th>
+<th style="text-align: center;">Neutral</th>
+<th style="text-align: center;">Positive</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Acquaintance</td>
+<td style="text-align: center;">11.36</td>
+<td style="text-align: center;">21.15</td>
+<td style="text-align: center;">40.97</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Close Person</td>
+<td style="text-align: center;">28.84</td>
+<td style="text-align: center;">32.36</td>
+<td style="text-align: center;">59.01</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Disliked Person</td>
+<td style="text-align: center;">36.74</td>
+<td style="text-align: center;">25.23</td>
+<td style="text-align: center;">12.71</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="radar-plot-1">Radar Plot 1</h2>
+<p>To create a radar plot for my visualization. I initially attempted to create my radar plot using <code>ggradar</code> but found that the <code>ggradar</code> pacakge was not flexible at handling non-scaled data. Consultation with <a href="https://stackoverflow.com/questions/55243307/how-to-use-ggradar-without-rescale-changing-the-results">stack overflow</a> and the <a href="https://github.com/ricardo-bion/ggradar/issues/7">developer’s github</a> didn’t seem to provide a solution that did not require data rescaling. I later came across the <code>ggiraphExtra</code> package and decided to use that for my viusalization.</p>
+<p>Similar to the Alluvial Plot, the Radar Plot was also completey new to me prior to this project. My first attempt at my radar plot visualization is to hope I have supplied the correct data format to <code>ggiraphExtra</code> to produce a radar plot.</p>
+<p>As seen below, in my first rendition of the radar plot, I was able to get the general visualization that I was hoping to achieve. It is also nice that the positive and negative valence are located on opposite end of the plot while neutral was at the bottom. This allowed my radar areas to spread out nicely and one can easily see the polar opposite direction of positive and negative trait adjective distribution between the close person compared to the disliked person. Furthermore, the overall area for the close person is larger compared to an acquaintance or disliked person (e.g., overall greater overlap score in all valence for someone you are close with than for less close targets).</p>
+<p>The major challenge I encountered working with the radar plot is the difficulty at understanding and customizing the X &amp; Y axis and in particular the X axis (which creates the raial effect of the plot). Also, I was not able to understand why the Y axis scale generated by default for the plot was incorrect (values are off by 10)</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+ggRadar(data = radar_d, aes(group=relationship), rescale = FALSE)</code></pre>
+<p><img src="self-other-overlap-radar-plot_files/figure-html5/radar_p1-1.png" width="624" /></p>
+</div>
+<h2 id="radar-plot-2">Radar Plot 2</h2>
+<p>In the second iteration of the radar plot:</p>
+<ul>
+<li>I wanted to clean up the looks of my plot so I changed the theme to <code>theme_minial()</code>.<br />
+</li>
+<li>I applied the same r color brewer <code>palette = &quot;Dark2&quot;</code> as my alluvial plot to keep my colors consistent across the same dataset.</li>
+<li>I moved the legend from the top to the bottom to make the legend less distracting.</li>
+</ul>
+<p>More Areas of improvement:</p>
+<ul>
+<li>Definitely need to fix the Y axis scale as the values are incorrect which would mislead my audience. Preferably have the Y axis scale embeded in the radar plot as it is difficult to interpret off to the side.</li>
+<li>Eliminate the legend if possible, such as through in plot annotation or utilizing colored plot caption.</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+ggRadar(data = radar_d, aes(color = relationship), rescale = FALSE) + 
+  theme_minimal(14) + 
+  theme(legend.position = &quot;bottom&quot;) + 
+  scale_color_brewer(palette = &quot;Dark2&quot;) +
+  scale_fill_brewer(palette = &quot;Dark2&quot;) </code></pre>
+<p><img src="self-other-overlap-radar-plot_files/figure-html5/radar_p2-1.png" width="624" /></p>
+</div>
+<h2 id="radar-plot-3">Radar Plot 3</h2>
+<p>In the final iteration of my radar plot, I made changes that enabled my radar plot to be a stand-alone visualization:</p>
+<ul>
+<li>Used <code>annotate</code> to manually add in the correct Y axis scale.</li>
+<li>After adding the correct Y axis scale manually using <code>annotate</code>, I didn’t really understand why the position of my valence nodes shifted on the radar plot.</li>
+<li>Added a title to my plot.</li>
+<li>Added subtitle to provide additional information about the different relationship closeness level and valence of the traits.</li>
+<li>Added caption to provide concrete example of positive, neutral and negative traits. Caption also provided the total sample size. I utilized <code>ggtext</code> to insert html formatting - bold, italic, new parargaph - in my caption.</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+ggRadar(data = radar_d, aes(color = relationship), rescale = FALSE) + 
+  theme_minimal(13) + 
+  theme(axis.text.y = element_blank(), 
+        legend.position = &quot;none&quot;) + 
+  annotate(&quot;text&quot;, x = 0, y = 20, label = &quot;20%&quot;, color = &quot;gray30&quot;) + 
+  annotate(&quot;text&quot;, x = 0, y = 30, label = &quot;30%&quot;, color = &quot;gray30&quot;) +
+  annotate(&quot;text&quot;, x = 0, y = 40, label = &quot;40%&quot;, color = &quot;gray30&quot;) +
+  annotate(&quot;text&quot;, x = 0, y = 50, label = &quot;50%&quot;, color = &quot;gray30&quot;) +
+  annotate(&quot;text&quot;, x = 0, y = 60, label = &quot;60%&quot;, color = &quot;gray30&quot;) +
+  scale_color_brewer(palette = &quot;Dark2&quot;) + 
+  scale_fill_brewer(palette = &quot;Dark2&quot;) + 
+  labs(y = &quot;&quot;, 
+       title = &quot;Mean self-other overlap score from the Trait Adjective Checklist&quot;,
+       subtitle = &quot;By relationship (&lt;span style = &#39;color : #1b9e77&#39;&gt;close person&lt;/span&gt;,&lt;span style = &#39;color : #d95f02&#39;&gt; acquaintance&lt;/span&gt;,&lt;span style = &#39;color : #7570b3&#39;&gt; disliked person&lt;/span&gt;) &lt;p&gt;and trait valence&quot;, 
+       caption = &quot;Example of &lt;b&gt;positive traits&lt;/b&gt;: attractive, clever, self-confident;
+       &lt;p&gt;&lt;b&gt;neutral traits&lt;/b&gt;: deliberate, frank, shy;
+       &lt;p&gt;&lt;b&gt;negative traits&lt;/b&gt;: messy, rude, immature. (&lt;i&gt;N&lt;/i&gt; = 155)&quot;) + 
+  theme(legend.position = &quot;none&quot;, 
+        plot.subtitle = element_markdown(),
+        plot.caption = element_markdown(),
+        plot.title.position = &quot;plot&quot;)</code></pre>
+<p><img src="self-other-overlap-radar-plot_files/figure-html5/radar_p3-1.png" width="672" data-distill-preview=1 /></p>
+</div>
+<h2 id="extra-radar-plot---interactive">Extra Radar Plot - interactive</h2>
+<p>One of the main feature of <code>ggiraphExtra</code> is the ability to add <a href="https://cran.r-project.org/web/packages/ggiraphExtra/vignettes/introduction.html">interactive plots</a>. I tested this function out by simply assinging <code>ggRadar(interactive = TRUE)</code>. I also tried to play around with changing additional aesthetic features of the plot such as theme and color palettes but it didn’t look like those options work with the interactive plot which may limit the appicability of the interactive radar plot.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+ggRadar(data = radar_d, aes(color = relationship), 
+        rescale = FALSE, interactive = TRUE)</code></pre>
+<div id="htmlwidget-7067c9976c76a87833d6" style="width:624px;height:384px;" class="girafe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7067c9976c76a87833d6">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168\" viewBox=\"0 0 432.00 360.00\">\n  <g>\n    <defs>\n      <clipPath id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_cl_1\">\n        <rect x=\"0.00\" y=\"0.00\" width=\"432.00\" height=\"360.00\"/>\n      <\/clipPath>\n    <\/defs>\n    <rect x=\"0.00\" y=\"0.00\" width=\"432.00\" height=\"360.00\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_1\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_1)\" fill=\"#FFFFFF\" fill-opacity=\"1\" stroke-width=\"0.75\" stroke=\"#FFFFFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>\n    <defs>\n      <clipPath id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_cl_2\">\n        <rect x=\"0.00\" y=\"0.00\" width=\"432.00\" height=\"360.00\"/>\n      <\/clipPath>\n    <\/defs>\n    <defs>\n      <clipPath id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_cl_3\">\n        <rect x=\"51.68\" y=\"0.00\" width=\"328.63\" height=\"360.00\"/>\n      <\/clipPath>\n    <\/defs>\n    <rect x=\"51.68\" y=\"0.00\" width=\"328.63\" height=\"360.00\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_2\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_3)\" fill=\"#FFFFFF\" fill-opacity=\"1\" stroke-width=\"1.06698\" stroke=\"#FFFFFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>\n    <defs>\n      <clipPath id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_cl_4\">\n        <rect x=\"0.00\" y=\"0.00\" width=\"432.00\" height=\"360.00\"/>\n      <\/clipPath>\n    <\/defs>\n    <defs>\n      <clipPath id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5\">\n        <rect x=\"84.95\" y=\"44.68\" width=\"289.89\" height=\"289.89\"/>\n      <\/clipPath>\n    <\/defs>\n    <rect x=\"84.95\" y=\"44.68\" width=\"289.89\" height=\"289.89\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_3\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"#EBEBEB\" fill-opacity=\"1\" stroke=\"none\"/>\n    <polyline points=\"229.89,189.62 342.87,124.40\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_4\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#FFFFFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"229.89,189.62 229.89,320.07\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_5\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#FFFFFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"229.89,189.62 116.92,124.40\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_6\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#FFFFFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"229.89,168.59 231.23,168.64 232.55,168.76 233.87,168.97 235.17,169.27 236.45,169.64 237.71,170.10 238.93,170.63 240.12,171.25 241.26,171.93 242.36,172.69 243.41,173.51 244.40,174.40 245.34,175.35 246.21,176.36 247.02,177.42 247.76,178.54 248.43,179.69 249.02,180.89 249.54,182.12 249.97,183.38 250.33,184.66 250.60,185.97 250.79,187.29 250.90,188.62 250.92,189.96 250.86,191.29 250.71,192.62 250.48,193.93 250.16,195.23 249.76,196.50 249.29,197.75 248.73,198.96 248.10,200.14 247.40,201.27 246.63,202.36 245.79,203.39 244.88,204.37 243.91,205.30 242.89,206.15 241.82,206.94 240.69,207.67 239.53,208.31 238.32,208.89 237.08,209.38 235.82,209.80 234.53,210.14 233.21,210.39 231.89,210.56 230.56,210.64 229.22,210.64 227.89,210.56 226.57,210.39 225.26,210.14 223.97,209.80 222.70,209.38 221.46,208.89 220.26,208.31 219.09,207.67 217.97,206.94 216.89,206.15 215.87,205.30 214.90,204.37 214.00,203.39 213.16,202.36 212.38,201.27 211.68,200.14 211.05,198.96 210.50,197.75 210.02,196.50 209.62,195.23 209.31,193.93 209.08,192.62 208.93,191.29 208.87,189.96 208.89,188.62 208.99,187.29 209.18,185.97 209.46,184.66 209.81,183.38 210.25,182.12 210.76,180.89 211.36,179.69 212.02,178.54 212.76,177.42 213.57,176.36 214.44,175.35 215.38,174.40 216.37,173.51 217.42,172.69 218.52,171.93 219.67,171.25 220.85,170.63 222.08,170.10 223.33,169.64 224.61,169.27 225.91,168.97 227.23,168.76 228.56,168.64 229.89,168.59\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_7\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#FFFFFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"229.89,144.26 232.77,144.35 235.63,144.62 238.48,145.08 241.29,145.71 244.05,146.52 246.75,147.51 249.39,148.66 251.95,149.98 254.42,151.46 256.79,153.09 259.05,154.87 261.20,156.79 263.22,158.84 265.10,161.02 266.85,163.31 268.44,165.71 269.88,168.20 271.16,170.78 272.27,173.43 273.21,176.15 273.98,178.93 274.57,181.75 274.98,184.59 275.21,187.46 275.25,190.34 275.11,193.22 274.79,196.08 274.30,198.91 273.62,201.71 272.76,204.46 271.73,207.15 270.54,209.77 269.18,212.30 267.66,214.75 265.99,217.10 264.18,219.33 262.22,221.44 260.14,223.43 257.93,225.28 255.62,226.99 253.19,228.54 250.68,229.94 248.08,231.18 245.41,232.25 242.67,233.15 239.89,233.87 237.06,234.42 234.20,234.78 231.33,234.96 228.45,234.96 225.58,234.78 222.72,234.42 219.90,233.87 217.11,233.15 214.38,232.25 211.70,231.18 209.10,229.94 206.59,228.54 204.17,226.99 201.85,225.28 199.64,223.43 197.56,221.44 195.61,219.33 193.79,217.10 192.12,214.75 190.61,212.30 189.25,209.77 188.05,207.15 187.02,204.46 186.17,201.71 185.49,198.91 184.99,196.08 184.67,193.22 184.53,190.34 184.58,187.46 184.81,184.59 185.22,181.75 185.81,178.93 186.57,176.15 187.51,173.43 188.63,170.78 189.91,168.20 191.34,165.71 192.94,163.31 194.68,161.02 196.57,158.84 198.59,156.79 200.73,154.87 203.00,153.09 205.37,151.46 207.84,149.98 210.39,148.66 213.03,147.51 215.74,146.52 218.50,145.71 221.31,145.08 224.15,144.62 227.01,144.35 229.89,144.26\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_8\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#FFFFFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"229.89,119.92 234.31,120.06 238.72,120.48 243.08,121.18 247.40,122.16 251.64,123.40 255.80,124.92 259.85,126.69 263.78,128.72 267.57,130.99 271.22,133.50 274.69,136.23 277.99,139.18 281.09,142.33 283.99,145.67 286.67,149.19 289.12,152.88 291.33,156.71 293.29,160.67 295.00,164.75 296.45,168.93 297.63,173.19 298.53,177.52 299.16,181.90 299.51,186.31 299.58,190.73 299.37,195.15 298.88,199.54 298.11,203.90 297.07,208.20 295.76,212.42 294.18,216.55 292.34,220.57 290.25,224.47 287.92,228.23 285.36,231.83 282.57,235.27 279.57,238.52 276.37,241.57 272.98,244.41 269.42,247.03 265.70,249.42 261.83,251.57 257.84,253.48 253.73,255.12 249.53,256.50 245.25,257.61 240.90,258.45 236.52,259.01 232.10,259.29 227.68,259.29 223.27,259.01 218.88,258.45 214.54,257.61 210.26,256.50 206.05,255.12 201.95,253.48 197.95,251.57 194.09,249.42 190.37,247.03 186.81,244.41 183.42,241.57 180.22,238.52 177.22,235.27 174.43,231.83 171.86,228.23 169.53,224.47 167.44,220.57 165.60,216.55 164.03,212.42 162.71,208.20 161.67,203.90 160.90,199.54 160.41,195.15 160.20,190.73 160.27,186.31 160.62,181.90 161.25,177.52 162.16,173.19 163.34,168.93 164.78,164.75 166.49,160.67 168.45,156.71 170.67,152.88 173.12,149.19 175.79,145.67 178.69,142.33 181.79,139.18 185.09,136.23 188.57,133.50 192.21,130.99 196.00,128.72 199.94,126.69 203.99,124.92 208.14,123.40 212.39,122.16 216.70,121.18 221.07,120.48 225.47,120.06 229.89,119.92\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_9\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#FFFFFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"229.89,95.59 235.86,95.78 241.80,96.34 247.69,97.29 253.51,98.60 259.23,100.28 264.84,102.32 270.31,104.72 275.61,107.45 280.73,110.52 285.65,113.90 290.34,117.59 294.78,121.57 298.97,125.82 302.88,130.33 306.49,135.08 309.80,140.05 312.78,145.21 315.43,150.56 317.73,156.06 319.69,161.70 321.28,167.45 322.50,173.29 323.35,179.20 323.82,185.15 323.92,191.11 323.63,197.07 322.97,203.01 321.93,208.88 320.53,214.68 318.76,220.38 316.63,225.95 314.15,231.38 311.33,236.64 308.18,241.71 304.72,246.57 300.96,251.20 296.91,255.59 292.59,259.70 288.02,263.54 283.22,267.08 278.20,270.30 272.98,273.20 267.59,275.77 262.05,277.99 256.38,279.85 250.61,281.35 244.75,282.48 238.83,283.23 232.88,283.61 226.91,283.61 220.95,283.23 215.03,282.48 209.18,281.35 203.40,279.85 197.73,277.99 192.19,275.77 186.80,273.20 181.59,270.30 176.57,267.08 171.76,263.54 167.19,259.70 162.87,255.59 158.83,251.20 155.06,246.57 151.60,241.71 148.46,236.64 145.64,231.38 143.16,225.95 141.03,220.38 139.26,214.68 137.85,208.88 136.81,203.01 136.15,197.07 135.87,191.11 135.96,185.15 136.44,179.20 137.29,173.29 138.51,167.45 140.10,161.70 142.05,156.06 144.35,150.56 147.00,145.21 149.99,140.05 153.29,135.08 156.91,130.33 160.81,125.82 165.00,121.57 169.45,117.59 174.14,113.90 179.05,110.52 184.17,107.45 189.48,104.72 194.94,102.32 200.55,100.28 206.28,98.60 212.10,97.29 217.99,96.34 223.93,95.78 229.89,95.59\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_10\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#FFFFFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"229.89,59.17 238.17,59.43 246.41,60.22 254.58,61.53 262.65,63.35 270.60,65.69 278.38,68.52 285.96,71.84 293.32,75.63 300.42,79.88 307.24,84.57 313.74,89.69 319.91,95.21 325.72,101.11 331.14,107.37 336.15,113.95 340.74,120.85 344.88,128.01 348.55,135.43 351.75,143.07 354.46,150.89 356.67,158.87 358.36,166.97 359.54,175.16 360.20,183.42 360.33,191.69 359.93,199.96 359.02,208.19 357.58,216.34 355.63,224.38 353.17,232.29 350.21,240.02 346.78,247.55 342.87,254.85 338.50,261.88 333.70,268.62 328.48,275.05 322.86,281.13 316.87,286.84 310.53,292.16 303.87,297.07 296.90,301.55 289.67,305.57 282.19,309.13 274.51,312.21 266.64,314.79 258.63,316.87 250.50,318.43 242.29,319.48 234.03,320.01 225.75,320.01 217.49,319.48 209.28,318.43 201.15,316.87 193.14,314.79 185.28,312.21 177.59,309.13 170.12,305.57 162.88,301.55 155.92,297.07 149.25,292.16 142.91,286.84 136.92,281.13 131.30,275.05 126.08,268.62 121.28,261.88 116.92,254.85 113.01,247.55 109.57,240.02 106.62,232.29 104.16,224.38 102.21,216.34 100.77,208.19 99.85,199.96 99.46,191.69 99.59,183.42 100.25,175.16 101.42,166.97 103.12,158.87 105.32,150.89 108.03,143.07 111.23,135.43 114.91,128.01 119.04,120.85 123.63,113.95 128.64,107.37 134.06,101.11 139.87,95.21 146.04,89.69 152.55,84.57 159.37,79.88 166.47,75.63 173.82,71.84 181.41,68.52 189.19,65.69 197.13,63.35 205.20,61.53 213.38,60.22 221.62,59.43 229.89,59.17\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_11\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#FFFFFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polygon points=\"266.73,168.35 229.89,240.73 129.47,131.64\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_12\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"#F8766D\" fill-opacity=\"0.3\" stroke-width=\"1.06698\" stroke=\"#F8766D\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\" title=\"relationship=Close Person\"/>\n    <polygon points=\"229.89,189.62 229.89,213.45 167.50,153.60\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_13\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"#00BA38\" fill-opacity=\"0.3\" stroke-width=\"1.06698\" stroke=\"#00BA38\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\" title=\"relationship=Acquaintance\"/>\n    <polygon points=\"283.39,158.74 229.89,223.38 227.04,187.98\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_14\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"#619CFF\" fill-opacity=\"0.3\" stroke-width=\"1.06698\" stroke=\"#619CFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\" title=\"relationship=Disliked Person\"/>\n    <circle cx=\"266.73\" cy=\"168.35\" r=\"2.67pt\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_15\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"#F8766D\" fill-opacity=\"1\" stroke-width=\"0.708661\" stroke=\"#F8766D\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\" data-id=\"1\" title=\"relationship=Close Person&amp;lt;br&amp;gt;Negative=28.8\"/>\n    <circle cx=\"229.89\" cy=\"240.73\" r=\"2.67pt\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_16\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"#F8766D\" fill-opacity=\"1\" stroke-width=\"0.708661\" stroke=\"#F8766D\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\" data-id=\"2\" title=\"relationship=Close Person&amp;lt;br&amp;gt;Neutral=32.4\"/>\n    <circle cx=\"129.47\" cy=\"131.64\" r=\"2.67pt\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_17\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"#F8766D\" fill-opacity=\"1\" stroke-width=\"0.708661\" stroke=\"#F8766D\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\" data-id=\"3\" title=\"relationship=Close Person&amp;lt;br&amp;gt;Positive=59\"/>\n    <circle cx=\"229.89\" cy=\"189.62\" r=\"2.67pt\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_18\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"#00BA38\" fill-opacity=\"1\" stroke-width=\"0.708661\" stroke=\"#00BA38\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\" data-id=\"4\" title=\"relationship=Acquaintance&amp;lt;br&amp;gt;Negative=11.4\"/>\n    <circle cx=\"229.89\" cy=\"213.45\" r=\"2.67pt\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_19\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"#00BA38\" fill-opacity=\"1\" stroke-width=\"0.708661\" stroke=\"#00BA38\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\" data-id=\"5\" title=\"relationship=Acquaintance&amp;lt;br&amp;gt;Neutral=21.1\"/>\n    <circle cx=\"167.50\" cy=\"153.60\" r=\"2.67pt\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_20\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"#00BA38\" fill-opacity=\"1\" stroke-width=\"0.708661\" stroke=\"#00BA38\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\" data-id=\"6\" title=\"relationship=Acquaintance&amp;lt;br&amp;gt;Positive=41\"/>\n    <circle cx=\"283.39\" cy=\"158.74\" r=\"2.67pt\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_21\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"#619CFF\" fill-opacity=\"1\" stroke-width=\"0.708661\" stroke=\"#619CFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\" data-id=\"7\" title=\"relationship=Disliked Person&amp;lt;br&amp;gt;Negative=36.7\"/>\n    <circle cx=\"229.89\" cy=\"223.38\" r=\"2.67pt\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_22\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"#619CFF\" fill-opacity=\"1\" stroke-width=\"0.708661\" stroke=\"#619CFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\" data-id=\"8\" title=\"relationship=Disliked Person&amp;lt;br&amp;gt;Neutral=25.2\"/>\n    <circle cx=\"227.04\" cy=\"187.98\" r=\"2.67pt\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_23\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\" fill=\"#619CFF\" fill-opacity=\"1\" stroke-width=\"0.708661\" stroke=\"#619CFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\" data-id=\"9\" title=\"relationship=Disliked Person&amp;lt;br&amp;gt;Positive=12.7\"/>\n    <g clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\">\n      <text x=\"325.51\" y=\"127.55\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_24\" font-size=\"6.60pt\" fill=\"#4D4D4D\" fill-opacity=\"1\" font-family=\"Helvetica\">Negative<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\">\n      <text x=\"215.71\" y=\"323.23\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_25\" font-size=\"6.60pt\" fill=\"#4D4D4D\" fill-opacity=\"1\" font-family=\"Helvetica\">Neutral<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_5)\">\n      <text x=\"101.52\" y=\"127.55\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_26\" font-size=\"6.60pt\" fill=\"#4D4D4D\" fill-opacity=\"1\" font-family=\"Helvetica\">Positive<\/text>\n    <\/g>\n    <defs>\n      <clipPath id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6\">\n        <rect x=\"0.00\" y=\"0.00\" width=\"432.00\" height=\"360.00\"/>\n      <\/clipPath>\n    <\/defs>\n    <g clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\">\n      <text x=\"70.23\" y=\"171.75\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_27\" font-size=\"6.60pt\" fill=\"#4D4D4D\" fill-opacity=\"1\" font-family=\"Helvetica\">20<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\">\n      <text x=\"70.23\" y=\"147.41\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_28\" font-size=\"6.60pt\" fill=\"#4D4D4D\" fill-opacity=\"1\" font-family=\"Helvetica\">30<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\">\n      <text x=\"70.23\" y=\"123.08\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_29\" font-size=\"6.60pt\" fill=\"#4D4D4D\" fill-opacity=\"1\" font-family=\"Helvetica\">40<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\">\n      <text x=\"70.23\" y=\"98.74\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_30\" font-size=\"6.60pt\" fill=\"#4D4D4D\" fill-opacity=\"1\" font-family=\"Helvetica\">50<\/text>\n    <\/g>\n    <polyline points=\"82.21,168.59 84.95,168.59\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_31\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#333333\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"82.21,144.26 84.95,144.26\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_32\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#333333\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"82.21,119.92 84.95,119.92\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_33\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#333333\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <polyline points=\"82.21,95.59 84.95,95.59\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_34\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"none\" stroke-width=\"1.06698\" stroke=\"#333333\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"butt\"/>\n    <rect x=\"70.31\" y=\"5.48\" width=\"319.16\" height=\"28.24\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_35\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"#FFFFFF\" fill-opacity=\"1\" stroke=\"none\"/>\n    <g clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\">\n      <text x=\"75.79\" y=\"23.54\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_36\" font-size=\"8.25pt\" font-family=\"Helvetica\">relationship<\/text>\n    <\/g>\n    <rect x=\"137.53\" y=\"10.96\" width=\"17.28\" height=\"17.28\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_37\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"#F2F2F2\" fill-opacity=\"1\" stroke=\"none\"/>\n    <rect x=\"138.23\" y=\"11.67\" width=\"15.86\" height=\"15.86\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_38\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"#F8766D\" fill-opacity=\"0.3\" stroke-width=\"1.06698\" stroke=\"#F8766D\" stroke-opacity=\"1\" stroke-linejoin=\"miter\" stroke-linecap=\"square\"/>\n    <circle cx=\"146.17\" cy=\"19.60\" r=\"2.67pt\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_39\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"#F8766D\" fill-opacity=\"1\" stroke-width=\"0.708661\" stroke=\"#F8766D\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>\n    <rect x=\"218.57\" y=\"10.96\" width=\"17.28\" height=\"17.28\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_40\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"#F2F2F2\" fill-opacity=\"1\" stroke=\"none\"/>\n    <rect x=\"219.28\" y=\"11.67\" width=\"15.86\" height=\"15.86\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_41\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"#00BA38\" fill-opacity=\"0.3\" stroke-width=\"1.06698\" stroke=\"#00BA38\" stroke-opacity=\"1\" stroke-linejoin=\"miter\" stroke-linecap=\"square\"/>\n    <circle cx=\"227.21\" cy=\"19.60\" r=\"2.67pt\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_42\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"#00BA38\" fill-opacity=\"1\" stroke-width=\"0.708661\" stroke=\"#00BA38\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>\n    <rect x=\"300.12\" y=\"10.96\" width=\"17.28\" height=\"17.28\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_43\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"#F2F2F2\" fill-opacity=\"1\" stroke=\"none\"/>\n    <rect x=\"300.83\" y=\"11.67\" width=\"15.86\" height=\"15.86\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_44\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"#619CFF\" fill-opacity=\"0.3\" stroke-width=\"1.06698\" stroke=\"#619CFF\" stroke-opacity=\"1\" stroke-linejoin=\"miter\" stroke-linecap=\"square\"/>\n    <circle cx=\"308.76\" cy=\"19.60\" r=\"2.67pt\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_45\" clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\" fill=\"#619CFF\" fill-opacity=\"1\" stroke-width=\"0.708661\" stroke=\"#619CFF\" stroke-opacity=\"1\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>\n    <g clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\">\n      <text x=\"160.29\" y=\"22.76\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_46\" font-size=\"6.60pt\" font-family=\"Helvetica\">Close Person<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\">\n      <text x=\"241.33\" y=\"22.76\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_47\" font-size=\"6.60pt\" font-family=\"Helvetica\">Acquaintance<\/text>\n    <\/g>\n    <g clip-path=\"url(#svg_a088d8fa-0daa-49ee-9452-721522278168_cl_6)\">\n      <text x=\"322.88\" y=\"22.76\" id=\"svg_a088d8fa-0daa-49ee-9452-721522278168_el_48\" font-size=\"6.60pt\" font-family=\"Helvetica\">Disliked Person<\/text>\n    <\/g>\n  <\/g>\n<\/svg>\n","js":null,"uid":"svg_a088d8fa-0daa-49ee-9452-721522278168","ratio":1.2,"settings":{"tooltip":{"css":" .tooltip_SVGID_ { background-color:white;font-style:italic;padding:10px;border-radius:10px 20px 10px 20px; ; position:absolute;pointer-events:none;z-index:999;}\n","offx":10,"offy":0,"use_cursor_pos":true,"opacity":0.75,"usefill":false,"usestroke":false,"delay":{"over":200,"out":500}},"hover":{"css":" .hover_SVGID_ { r:4px;cursor:pointer;stroke-width:6px; }\n"},"hoverkey":{"css":" .hover_key_SVGID_ { stroke:red; }\n"},"hovertheme":{"css":" .hover_theme_SVGID_ { fill:green; }\n"},"zoom":{"min":1,"max":10},"capture":{"css":" .selected_SVGID_ { fill:#FF3333;stroke:black; }\n","type":"multiple","only_shiny":true,"selected":[]},"capturekey":{"css":" .selected_key_SVGID_ { stroke:gray; }\n","type":"single","only_shiny":true,"selected":[]},"capturetheme":{"css":" .selected_theme_SVGID_ { stroke:gray; }\n","type":"single","only_shiny":true,"selected":[]},"toolbar":{"position":"top","saveaspng":false},"sizing":{"rescale":true,"width":0.75}}},"evals":[],"jsHooks":[]}</script>
+</div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
